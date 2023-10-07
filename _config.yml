@@ -10,3 +10,9 @@ remote_theme: jekyll/minima
 
 minima:
   skin: dark
+
+header_pages:
+  - home.md
+  - research.md
+  - publication.md
+  - contact.md
