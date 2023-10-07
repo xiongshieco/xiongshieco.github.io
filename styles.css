@@ -19,3 +19,12 @@
     margin-top: 0;  /* 去掉标题与页面顶部的间距 */
     padding-top: 0; /* 确保没有额外的内部间距推动标题向下 */
 }
+
+h1 a {
+    color: inherit;  /* 使链接颜色与h1标题相同 */
+    text-decoration: none;  /* 去除下划线 */
+}
+
+h1 a:hover {
+    text-decoration: underline;  /* 当鼠标悬停时添加下划线 */
+}
