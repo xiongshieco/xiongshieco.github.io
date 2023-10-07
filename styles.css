@@ -12,3 +12,8 @@
     color: black;
     font-weight: bold;
 }
+
+#main-title {
+    text-align: center;
+    font-size: 2em;  /* 可选：如果你想要更大或更小的字体，可以调整这里 */
+}
