@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* 如果容器太小，允许项目换行 */
+    gap: 20px; /* 项目之间的间距 */
+}
+
+.section {
+    flex: 1; /* 使每个项目有相等的宽度 */
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 如果你希望每个部分的宽度都是固定的，而不是平均分配，你可以设置它们的宽度，例如： */
+/* .section {
+    width: 23%; 
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+} */
