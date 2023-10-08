@@ -13,7 +13,7 @@
     font-weight: bold;
 }
 
-main-title {
+#main-title {
     text-align: center;
     font-size: 5em;  /* 调整这个值以增大或减小字号 */
     margin-top: 0;  /* 去掉标题与页面顶部的间距 */
