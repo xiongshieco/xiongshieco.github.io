@@ -5,7 +5,6 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     color: black; /* 设置文本颜色为黑色 */
     font-weight: bold; /* 设置文本为粗体 */
-    font-style: italic;
 }
 
 .section h1 {
@@ -19,6 +18,7 @@
     font-size: 5em;  /* 调整这个值以增大或减小字号 */
     margin-top: 0;  /* 去掉标题与页面顶部的间距 */
     padding-top: 0; /* 确保没有额外的内部间距推动标题向下 */
+    font-style: italic;
 }
 
 h1 a {
