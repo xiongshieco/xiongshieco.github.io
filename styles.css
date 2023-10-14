@@ -6,12 +6,7 @@
     color: black; /* 设置文本颜色为黑色 */
     font-weight: bold; /* 设置文本为粗体 */
 }
-
-.section h1 {
-    /* 也可以为标题设置黑色粗体，但由于它们在.section内部，这可能是多余的 */
-    color: black;
-    font-weight: bold;
-}
+tuo
 
 #main-title {
     text-align: center;
@@ -34,4 +29,9 @@ h1 a:hover {
     margin: 0 auto;
     max-width: 1200px; /* 根据需要调整这个值 */
     padding: 0 20px; /* 这将在左右两边各添加20像素的间距 */
+}
+
+.myImage {
+    width: 300px;  /* 例子宽度值，您可以根据需要调整 */
+    height: auto; /* 保持图片的原始宽高比 */
 }
