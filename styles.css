@@ -8,6 +8,12 @@
 }
 tuo
 
+.section h1 {
+    /* 也可以为标题设置黑色粗体，但由于它们在.section内部，这可能是多余的 */
+    color: black;
+    font-weight: bold;
+}
+
 #main-title {
     text-align: center;
     font-size: 5em;  /* 调整这个值以增大或减小字号 */
@@ -32,6 +38,6 @@ h1 a:hover {
 }
 
 .myImage {
-    width: 300px;  /* 例子宽度值，您可以根据需要调整 */
+    width: 700px;  /* 例子宽度值，您可以根据需要调整 */
     height: auto; /* 保持图片的原始宽高比 */
 }
