@@ -1,7 +1,6 @@
 .section {
     flex: 1;
-    font-size: 5rem;  /* 调整为2.5rem或您想要的任何其他值 */
-    font-weight: bold; 
+    
     padding: 20px;
     border: 1px solid #ddd;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -11,9 +10,9 @@
 tuo
 
 .section h1 {
-    /* 也可以为标题设置黑色粗体，但由于它们在.section内部，这可能是多余的 */
+    font-size: 5rem;  /* 调整为2.5rem或您想要的任何其他值 */
+    font-weight: bold; 
     color: black;
-    font-weight: bold;
 }
 
 #main-title {
