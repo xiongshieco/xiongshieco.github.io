@@ -1,6 +1,6 @@
 .section {
     flex: 1;
-    font-size: 2.5rem;  /* 调整为2.5rem或您想要的任何其他值 */
+    font-size: 5rem;  /* 调整为2.5rem或您想要的任何其他值 */
     font-weight: bold; 
     padding: 20px;
     border: 1px solid #ddd;
@@ -31,7 +31,7 @@ tuo
 }
 
 .myImage {
-    max-width: 60%; /* 设定图像最大宽度为容器的90%。您可以根据需求进行调整 */
+    max-width: 50%; /* 设定图像最大宽度为容器的90%。您可以根据需求进行调整 */
     height: auto;   /* 保持原始的纵横比 */
 }
 
