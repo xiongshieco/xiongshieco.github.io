@@ -10,7 +10,7 @@
 tuo
 
 .section h1 {
-    font-size: 5rem;  /* 调整为2.5rem或您想要的任何其他值 */
+    font-size: 2rem;  /* 调整为2.5rem或您想要的任何其他值 */
     font-weight: bold; 
     color: black;
 }
@@ -30,7 +30,7 @@ tuo
 }
 
 .myImage {
-    max-width: 10%; /* 设定图像最大宽度为容器的90%。您可以根据需求进行调整 */
+    max-width: 60%; /* 设定图像最大宽度为容器的90%。您可以根据需求进行调整 */
     height: auto;   /* 保持原始的纵横比 */
 }
 
