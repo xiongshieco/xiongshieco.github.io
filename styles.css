@@ -22,9 +22,15 @@ tuo
     font-style: italic;
 }
 
+.image-container {
+    width: 100%;   /* 设定容器宽度为100% */
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 在水平方向上居中内容 */
+}
+
 .myImage {
-    width: 800px;  /* 例子宽度值，您可以根据需要调整 */
-    height: auto; /* 保持图片的原始宽高比 */
+    max-width: 90%; /* 设定图像最大宽度为容器的90%。您可以根据需求进行调整 */
+    height: auto;   /* 保持原始的纵横比 */
 }
 
 .nav-container {
