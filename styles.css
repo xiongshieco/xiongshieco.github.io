@@ -8,6 +8,10 @@
     font-weight: bold; /* 设置文本为粗体 */
 }
 
+.content-padding {
+            padding-left: 50px; /* 左侧留出空间 */
+            padding-right: 50px; /* 右侧留出空间 */
+        }
 
 .section h1 {
     font-size: 8rem;  /* 调整为2.5rem或您想要的任何其他值 */
