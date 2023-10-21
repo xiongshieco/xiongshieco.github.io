@@ -9,8 +9,8 @@
 }
 
 .content-padding {
-            padding-left: 50px; /* 左侧留出空间 */
-            padding-right: 50px; /* 右侧留出空间 */
+            padding-left: 100px; /* 左侧留出空间 */
+            padding-right: 100px; /* 右侧留出空间 */
         }
 
 .section h1 {
