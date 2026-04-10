@@ -7,59 +7,84 @@
     <style>
         body { 
             font-family: 'Aptos', 'Segoe UI', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif; 
-            line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; color: black; 
+            line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; color: black; 
         }
         
+        /* 1. 标题稍微加大 */
         #main-title { 
             text-align: center; 
-            font-size: clamp(2.5rem, 10vw, 5rem); 
+            font-size: clamp(3rem, 12vw, 6rem); /* 最小值从2.5调到3，最大值从5调到6 */
             font-style: italic; 
             font-weight: bold; 
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
-        .nav-container .navigation {
+        /* 导航栏基础样式 */
+        .nav-container { position: relative; }
+        .navigation {
             display: flex; justify-content: center; list-style: none; padding: 0; flex-wrap: wrap;
             margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 10px;
         }
-        .navigation li { margin: 0 15px; }
-        .navigation a { text-decoration: none; color: inherit; font-weight: 500; }
-        .navigation a:hover { text-decoration: underline; }
+        .navigation li { margin: 0 20px; }
+        .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.1rem; }
 
-        /* 优化图片容器：限制最大宽度为 400px，并水平居中 */
+        /* 2. 手机端菜单键（默认隐藏） */
+        .menu-toggle {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: -50px;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* 3. 图片稍微加大 */
         .image-container { 
             text-align: center; 
-            margin: 30px auto; 
-            max-width: 400px; 
+            margin: 40px auto; 
+            max-width: 450px; /* 从320px调大到450px */
         }
         .myImage { 
-            width: 100%; /* 占据容器的 100% */
+            width: 100%; 
             height: auto; 
-            border-radius: 8px; /* 稍微圆润一点更专业 */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 加一点阴影更有质感 */
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
         }
 
-        .center-text { text-align: center; font-size: 1.2rem; }
-        .center-text h1 { font-size: inherit; font-weight: normal; margin-bottom: 15px; }
-        
-        /* 突出北大博后的信息 */
-        .new-position {
-            font-size: 1.1rem;
-            color: #333;
-            background-color: #f9f9f9;
-            padding: 10px;
-            display: inline-block;
-            border-radius: 4px;
+        .center-text { text-align: center; font-size: 1.3rem; padding: 0 10px; }
+        .center-text p { margin-bottom: 18px; }
+        footer { text-align: center; margin-top: 60px; font-size: 0.8em; color: #666; }
+
+        /* 4. 手机端响应式逻辑 */
+        @media (max-width: 600px) {
+            #main-title { text-align: left; padding-right: 50px; } /* 给菜单键留位置 */
+            
+            .menu-toggle { display: block; } /* 显示菜单键 */
+            
+            .navigation {
+                display: none; /* 默认隐藏菜单 */
+                flex-direction: column;
+                text-align: center;
+                border-bottom: none;
+                background: #f9f9f9;
+                padding: 20px 0;
+                border-radius: 8px;
+            }
+            .navigation.active { display: flex; } /* 点击后显示 */
+            .navigation li { margin: 10px 0; }
         }
-        
-        footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #666; }
     </style>
 </head>
 <body>
-    <h1 id="main-title">Xiong Shi</h1>
+
     <div class="nav-container">
-        <ul class="navigation">
+        <h1 id="main-title">Xiong Shi</h1>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        
+        <ul class="navigation" id="navMenu">
             <li><a href="index.html">Home</a></li>
             <li><a href="research.html">Research</a></li>
             <li><a href="publication.html">Publication</a></li>
@@ -73,11 +98,26 @@
 
     <div class="center-text">
       <p>
-        I obtained my PhD from the University of Konstanz, 
-        supervised by <a href="https://www.biologie.uni-konstanz.de/kleunen/team/prof-dr-mark-van-kleunen/" style="color:inherit; font-weight: bold; text-decoration: underline;">Prof. Dr. Mark van Kleunen</a>. In May 2026, I will join <span class="pku-highlight">Peking University</span> as a Postdoctoral Fellow.
+        I obtained my PhD from the <a href="https://www.biologie.uni-konstanz.de/kleunen/" style="color:inherit; font-weight: bold; text-decoration: underline;">University of Konstanz</a>, 
+        supervised by <a href="https://www.biologie.uni-konstanz.de/kleunen/team/prof-dr-mark-van-kleunen/" style="color:inherit; font-weight: bold; text-decoration: underline;">Prof. Dr. Mark van Kleunen</a>.
+      </p>
+      
+      <p>
+        In May 2026, I will join <strong>Peking University</strong> as a Postdoctoral Fellow.
       </p>
     </div>
 
     <footer>&copy; 2026 Xiong Shi</footer>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("navMenu");
+            if (menu.className === "navigation") {
+                menu.className += " active";
+            } else {
+                menu.className = "navigation";
+            }
+        }
+    </script>
 </body>
 </html>
