@@ -6,7 +6,7 @@
     <title>Publications | Xiong Shi</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* 保持与首页一致的标题风格，但尺寸稍小 */
+        /* 保持与首页一致的标题风格 */
         #main-title {
             text-align: center;
             font-size: clamp(2rem, 8vw, 4rem);
@@ -14,7 +14,7 @@
             font-style: italic;
         }
 
-        /* 导航栏样式 */
+        /* 导航栏布局 */
         .nav-container .navigation {
             display: flex;
             justify-content: center;
@@ -23,10 +23,11 @@
             flex-wrap: wrap;
             margin-bottom: 40px;
         }
-        .navigation li { margin: 0 15px; }
-        .navigation a { text-decoration: none; color: #3498db; font-weight: bold; }
+        .navigation li { 
+            margin: 0 15px; 
+        }
 
-        /* 论文列表专用样式 */
+        /* 论文列表布局 */
         .content-container {
             max-width: 900px;
             margin: 0 auto;
@@ -37,11 +38,11 @@
             list-style: none;
             padding: 0;
             line-height: 1.7;
+            color: black; /* 确保文字颜色与你首页要求的 black 一致 */
         }
         .pub-list li {
             margin-bottom: 25px;
-            border-left: 3px solid #eee;
-            padding-left: 15px;
+            padding-left: 0;
         }
         .my-name {
             font-weight: bold;
@@ -52,14 +53,7 @@
         }
         .doi-link {
             font-size: 0.9em;
-            color: #666;
-            word-break: break-all; /* 防止长链接在手机端撑破屏幕 */
-        }
-        
-        h2 {
-            border-bottom: 2px solid #333;
-            display: inline-block;
-            margin-bottom: 20px;
+            word-break: break-all;
         }
     </style>
 </head>
@@ -77,7 +71,6 @@
     </div>
 
     <div class="content-container">
-        <h2>Journal Articles</h2>
         <ul class="pub-list">
 
             <li>
