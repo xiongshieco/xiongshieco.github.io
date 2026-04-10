@@ -3,20 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XiongShi</title>
+    <title>Xiong Shi</title>
     <link rel="stylesheet" href="styles.css">
 
-    <!-- 将样式放在这里，避免在<body>中混合内容和样式 -->
     <style>
-       #main-title {
-           text-align: center;
-           font-size: 5em;  
-           margin-top: 0;  
-           padding-top: 0;
-           font-style: italic;
-       }
+        #main-title {
+            text-align: center;
+            /* 关键修改：电脑端用 5em，手机端会自动缩小 */
+            font-size: clamp(2.5rem, 10vw, 5rem); 
+            margin-top: 20px;
+            padding-top: 0;
+            font-style: italic;
+        }
+
         .center-text {
             text-align: center;
+            padding: 0 15px; /* 防止文字贴着手机边缘 */
+        }
+
+        /* 针对图片在手机上的优化 */
+        .myImage {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .nav-container .navigation {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            flex-wrap: wrap; /* 手机端导航太长时自动换行 */
+        }
+
+        .navigation li {
+            margin: 0 15px;
+        }
+
+        /* 修复下方描述文字在手机太大的问题 */
+        .center-text h1 {
+            font-size: clamp(1.2rem, 5vw, 2rem);
         }
     </style>
 </head>
@@ -24,10 +51,9 @@
 
     <h1 id="main-title">Xiong Shi</h1>
 
-    <!-- 网站导航部分 -->
     <div class="nav-container">
         <ul class="navigation">
-            <li><a href="/">Home</a></li>
+            <li><a href="index.html">Home</a></li> <!-- 建议写全 index.html 避免本地跳转问题 -->
             <li><a href="research.html">Research</a></li>
             <li><a href="publication.html">Publication</a></li>
             <li><a href="contact.html">Contact</a></li>
@@ -35,13 +61,13 @@
     </div>
 
     <div class="image-container">
-        <img src="Weixin Image_20231005174427.jpg" alt="描述图片内容的文字" class="myImage">
+        <!-- 提醒：文件名中的空格在服务器上容易出错，建议改为 Weixin_Image.jpg -->
+        <img src="Weixin Image_20231005174427.jpg" alt="Xiong Shi" class="myImage">
     </div>
 
-    <!-- 修正了类名的<div>定义 -->
     <div class="center-text">
       <h1>I am <a href="https://www.biologie.uni-konstanz.de/kleunen/team/phd-and-master-students/xiong-shi/">Xiong Shi</a>, 
-        a phd supervised by
+        a PhD student supervised by
         <a href="https://www.biologie.uni-konstanz.de/kleunen/team/prof-dr-mark-van-kleunen/">Mark van Kleunen</a></h1>
     </div>
 
