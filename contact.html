@@ -10,18 +10,50 @@
         .nav-container { position: relative; width: 100%; }
         .navigation { display: flex; justify-content: center; list-style: none; padding: 0; margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
         .navigation li { margin: 0 25px; }
-        .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.5rem; }
+        .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.3rem; }
+        
         .menu-toggle { display: none; position: absolute; right: 10px; top: 20px; cursor: pointer; background: none; border: none; }
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
-        .contact-content { text-align: center; margin-top: 80px; font-size: 1.5rem; }
-        .back-home { margin-top: 50px; font-size: 1rem; }
+
+        /* --- 核心优化部分 --- */
+        .contact-content { 
+            text-align: center; 
+            margin-top: 80px; 
+            font-size: 1.5rem; 
+            padding: 0 10px;
+            /* 关键：防止长字符串溢出 */
+            word-break: break-all; 
+        }
+        .email-link {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid #ccc;
+            transition: 0.3s;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .email-link:hover {
+            border-bottom: 1px solid #000;
+            opacity: 0.7;
+        }
+        .email-divider {
+            margin: 0 10px;
+            color: #ccc;
+        }
+
+        .back-home { margin-top: 60px; font-size: 1rem; }
+
         @media (max-width: 768px) {
             #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
             .menu-toggle { display: block; }
-            .navigation { display: none; flex-direction: column; text-align: center; position: absolute; top: 80px; width: 100%; background: #fdfdfd; padding: 20px 0; }
+            .navigation { display: none; flex-direction: column; text-align: center; position: absolute; top: 80px; width: 100%; background: #fdfdfd; padding: 20px 0; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
             .navigation.active { display: flex; }
             .navigation li { margin: 15px 0; }
+            
+            /* 手机端稍微缩小字号，增加换行灵活性 */
+            .contact-content { font-size: 1.2rem; margin-top: 40px; }
+            .email-divider { display: block; height: 10px; visibility: hidden; } /* 手机端让斜杠消失并换行 */
         }
     </style>
 </head>
@@ -36,10 +68,18 @@
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
+
     <div class="contact-content">
-        Email: shi.xiong@uni-konstanz.de / shixiongsnnu@gmail.com
-        <div class="back-home"><a href="index.html" style="color:inherit; text-decoration:none;">← Return to Main Page</a></div>
+        <strong>Email:</strong><br>
+        <a href="mailto:xxxx@uni-konstanz.de" class="email-link">shi.xiong@uni-konstanz.de</a>
+        <span class="email-divider">/</span>
+        <a href="mailto:xxxxxxx@gmail.com" class="email-link">shixiongsnnu@gmail.com</a>
+        
+        <div class="back-home">
+            <a href="index.html" style="color:inherit; text-decoration:none;">← Return to Main Page</a>
+        </div>
     </div>
+
     <script>function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }</script>
 </body>
 </html>
