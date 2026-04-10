@@ -5,46 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research - Xiong Shi</title>
     <style>
-        body { 
-            font-family: 'Aptos', 'Segoe UI', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif; 
-            line-height: 1.8; padding: 20px; max-width: 800px; margin: auto; color: black; 
+        body { font-family: 'Aptos', sans-serif; line-height: 1.8; padding: 20px; max-width: 950px; margin: auto; color: black; }
+        #main-title { text-align: center; font-size: clamp(3rem, 12vw, 6rem); font-style: italic; font-weight: bold; margin-bottom: 20px; }
+        .nav-container { position: relative; width: 100%; }
+        .navigation { display: flex; justify-content: center; list-style: none; padding: 0; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .navigation li { margin: 0 25px; }
+        .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.3rem; }
+        .menu-toggle { display: none; position: absolute; right: 10px; top: 20px; cursor: pointer; background: none; border: none; }
+        .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
+        .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
+        .content-padding { text-align: justify; font-size: 1.3rem; max-width: 800px; margin: 40px auto; }
+        @media (max-width: 768px) {
+            #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
+            .menu-toggle { display: block; }
+            .navigation { display: none; flex-direction: column; text-align: center; position: absolute; top: 80px; width: 100%; background: #fdfdfd; padding: 20px 0; }
+            .navigation.active { display: flex; }
+            .navigation li { margin: 15px 0; }
         }
-        #main-title { 
-            text-align: center; font-size: clamp(2.5rem, 10vw, 5rem); 
-            font-style: italic; font-weight: bold; margin-bottom: 10px;
-        }
-        .nav-container .navigation {
-            display: flex; justify-content: center; list-style: none; padding: 0; flex-wrap: wrap;
-            margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 10px;
-        }
-        .navigation li { margin: 0 15px; }
-        .navigation a { text-decoration: none; color: inherit; font-weight: 500; }
-        .navigation a:hover { text-decoration: underline; }
-
-        .content-padding {
-            text-align: justify; font-size: 1.2rem; font-weight: normal;
-        }
-        footer { text-align: center; margin-top: 80px; font-size: 0.8em; color: #666; }
     </style>
 </head>
 <body>
-    <h1 id="main-title">Xiong Shi</h1>
     <div class="nav-container">
-        <ul class="navigation">
+        <h1 id="main-title">Xiong Shi</h1>
+        <button class="menu-toggle" onclick="toggleMenu()"><div class="hamburger-lines"><span class="line"></span><span class="line"></span><span class="line"></span></div></button>
+        <ul class="navigation" id="navMenu">
             <li><a href="index.html">Home</a></li>
             <li><a href="research.html">Research</a></li>
             <li><a href="publication.html">Publication</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
-
     <div class="content-padding">
         I am deeply interested in how ongoing global changes individually and interactively influence plants, 
         particularly in the context of coexistence between alien and native species. 
         To address this question, we will employ a multifaceted approach, including meta-analysis, 
         field studies, and greenhouse experiments.
     </div>
-
-    <footer>&copy; 2026 Xiong Shi</footer>
+    <script>function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }</script>
 </body>
 </html>
