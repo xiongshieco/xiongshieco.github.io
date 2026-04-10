@@ -28,18 +28,34 @@
         .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.1rem; }
         .navigation a:hover { text-decoration: underline; }
 
-        /* 汉堡键：大号按钮，方便点击 */
+        /* --- 汉堡菜单 CSS 绘图部分 --- */
         .menu-toggle {
             display: none;
             position: absolute;
-            right: -10px;
-            top: -65px; 
-            font-size: 3rem; 
+            right: 0;
+            top: -60px; 
             cursor: pointer;
             background: none;
             border: none;
             padding: 10px;
-            line-height: 1;
+            width: 45px;  /* 整体宽度 */
+            height: 35px; /* 整体高度 */
+        }
+
+        /* 绘制那三条横杠 */
+        .hamburger-lines {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 24px; /* 控制三条线总高度，拉长间距 */
+            width: 35px;  /* 控制线的长度 */
+        }
+
+        .line {
+            height: 3px;      /* 线的粗细 */
+            width: 100%;
+            background-color: black;
+            border-radius: 10px;
         }
 
         .image-container { 
@@ -60,7 +76,7 @@
         footer { text-align: center; margin-top: 60px; font-size: 0.8em; color: #666; }
 
         @media (max-width: 600px) {
-            #main-title { text-align: left; padding-right: 70px; }
+            #main-title { text-align: left; padding-right: 60px; }
             .menu-toggle { display: block; }
             .navigation {
                 display: none;
@@ -80,7 +96,14 @@
 
     <div class="nav-container">
         <h1 id="main-title">Xiong Shi</h1>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <div class="hamburger-lines">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </button>
         
         <ul class="navigation" id="navMenu">
             <li><a href="index.html">Home</a></li>
