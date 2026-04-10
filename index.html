@@ -19,7 +19,8 @@
             margin-bottom: 20px;
         }
 
-        .nav-container { position: relative; }
+        /* 导航栏基础样式 */
+        .nav-container { position: relative; width: 100%; }
         .navigation {
             display: flex; justify-content: center; list-style: none; padding: 0; flex-wrap: wrap;
             margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 10px;
@@ -28,67 +29,61 @@
         .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.1rem; }
         .navigation a:hover { text-decoration: underline; }
 
-        /* --- 汉堡菜单 CSS 绘图部分 --- */
+        /* --- 汉堡菜单 CSS 绘图 (修正定位) --- */
         .menu-toggle {
-            display: none;
+            display: none; /* 默认在电脑上隐藏 */
             position: absolute;
-            right: 0;
-            top: -60px; 
+            right: 10px;
+            top: 20px; /* 调整了位置，确保它在标题行内显示 */
             cursor: pointer;
             background: none;
             border: none;
-            padding: 10px;
-            width: 45px;  /* 整体宽度 */
-            height: 35px; /* 整体高度 */
+            padding: 5px;
+            z-index: 100; /* 确保在最上层 */
         }
 
-        /* 绘制那三条横杠 */
         .hamburger-lines {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 24px; /* 控制三条线总高度，拉长间距 */
-            width: 35px;  /* 控制线的长度 */
+            height: 22px; 
+            width: 32px;
         }
 
         .line {
-            height: 3px;      /* 线的粗细 */
+            height: 3px;
             width: 100%;
             background-color: black;
             border-radius: 10px;
         }
 
-        .image-container { 
-            text-align: center; 
-            margin: 40px auto; 
-            max-width: 450px; 
-        }
-        .myImage { 
-            width: 100%; 
-            height: auto; 
-            border-radius: 8px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        }
-
+        .image-container { text-align: center; margin: 40px auto; max-width: 450px; }
+        .myImage { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
         .center-text { text-align: center; font-size: 1.3rem; padding: 0 10px; max-width: 750px; margin: 0 auto; }
         .intro-paragraph { margin-bottom: 25px; line-height: 1.8; }
-        
         footer { text-align: center; margin-top: 60px; font-size: 0.8em; color: #666; }
 
-        @media (max-width: 600px) {
-            #main-title { text-align: left; padding-right: 60px; }
-            .menu-toggle { display: block; }
+        /* --- 手机端适配 (重要) --- */
+        @media (max-width: 768px) { /* 扩大了响应范围到 768px */
+            #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
+            
+            .menu-toggle { display: block; } /* 确保在这里显示出来 */
+            
             .navigation {
-                display: none;
+                display: none; 
                 flex-direction: column;
                 text-align: center;
                 border-bottom: none;
-                background: #f9f9f9;
+                background: #fdfdfd;
                 padding: 20px 0;
-                border-radius: 8px;
+                width: 100%;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                position: absolute;
+                top: 80px; /* 菜单弹出的位置 */
+                left: 0;
             }
             .navigation.active { display: flex; }
-            .navigation li { margin: 12px 0; }
+            .navigation li { margin: 15px 0; }
         }
     </style>
 </head>
@@ -97,7 +92,7 @@
     <div class="nav-container">
         <h1 id="main-title">Xiong Shi</h1>
         
-        <button class="menu-toggle" onclick="toggleMenu()">
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
             <div class="hamburger-lines">
                 <span class="line"></span>
                 <span class="line"></span>
@@ -130,10 +125,11 @@
     <script>
         function toggleMenu() {
             var menu = document.getElementById("navMenu");
-            if (menu.className === "navigation") {
-                menu.className += " active";
+            // 修正了 class 判断逻辑，确保更稳健
+            if (menu.classList.contains("active")) {
+                menu.classList.remove("active");
             } else {
-                menu.className = "navigation";
+                menu.classList.add("active");
             }
         }
     </script>
