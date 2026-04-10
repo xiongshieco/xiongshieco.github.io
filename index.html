@@ -3,57 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xiong Shi</title>
-    <link rel="stylesheet" href="styles.css">
-
+    <title>Home - Xiong Shi</title>
     <style>
-        #main-title {
-            text-align: center;
-            /* 关键修改：电脑端用 5em，手机端会自动缩小 */
+        body { 
+            font-family: 'Aptos', 'Segoe UI', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif; 
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; color: black; 
+        }
+        
+        #main-title { 
+            text-align: center; 
             font-size: clamp(2.5rem, 10vw, 5rem); 
-            margin-top: 20px;
-            padding-top: 0;
-            font-style: italic;
-        }
-
-        .center-text {
-            text-align: center;
-            padding: 0 15px; /* 防止文字贴着手机边缘 */
-        }
-
-        /* 针对图片在手机上的优化 */
-        .myImage {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
+            font-style: italic; 
+            font-weight: bold; 
+            margin-top: 0;
+            margin-bottom: 10px;
         }
 
         .nav-container .navigation {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 0;
-            flex-wrap: wrap; /* 手机端导航太长时自动换行 */
+            display: flex; justify-content: center; list-style: none; padding: 0; flex-wrap: wrap;
+            margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 10px;
         }
+        .navigation li { margin: 0 15px; }
+        .navigation a { text-decoration: none; color: inherit; font-weight: 500; }
+        .navigation a:hover { text-decoration: underline; }
 
-        .navigation li {
-            margin: 0 15px;
-        }
+        .image-container { text-align: center; margin: 30px 0; }
+        .myImage { max-width: 100%; height: auto; border-radius: 4px; }
 
-        /* 修复下方描述文字在手机太大的问题 */
-        .center-text h1 {
-            font-size: clamp(1.2rem, 5vw, 2rem);
-        }
+        .center-text { text-align: center; font-size: 1.2rem; }
+        .center-text h1 { font-size: inherit; font-weight: normal; }
+        
+        footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #666; }
     </style>
 </head>
 <body>
-
     <h1 id="main-title">Xiong Shi</h1>
-
     <div class="nav-container">
         <ul class="navigation">
-            <li><a href="index.html">Home</a></li> <!-- 建议写全 index.html 避免本地跳转问题 -->
+            <li><a href="index.html">Home</a></li>
             <li><a href="research.html">Research</a></li>
             <li><a href="publication.html">Publication</a></li>
             <li><a href="contact.html">Contact</a></li>
@@ -61,15 +48,15 @@
     </div>
 
     <div class="image-container">
-        <!-- 提醒：文件名中的空格在服务器上容易出错，建议改为 Weixin_Image.jpg -->
         <img src="Weixin Image_20231005174427.jpg" alt="Xiong Shi" class="myImage">
     </div>
 
     <div class="center-text">
-      <h1>I am <a href="https://www.biologie.uni-konstanz.de/kleunen/team/phd-and-master-students/xiong-shi/">Xiong Shi</a>, 
+      <h1>I am <a href="https://www.biologie.uni-konstanz.de/kleunen/team/phd-and-master-students/xiong-shi/" style="color:inherit;">Xiong Shi</a>, 
         a PhD student supervised by
-        <a href="https://www.biologie.uni-konstanz.de/kleunen/team/prof-dr-mark-van-kleunen/">Mark van Kleunen</a></h1>
+        <a href="https://www.biologie.uni-konstanz.de/kleunen/team/prof-dr-mark-van-kleunen/" style="color:inherit;">Mark van Kleunen</a></h1>
     </div>
 
+    <footer>&copy; 2026 Xiong Shi</footer>
 </body>
 </html>
