@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research | Xiong Shi</title>
     <link rel="stylesheet" href="styles.css">
-    
     <style>
-        /* 顶部大标题样式 */
+        /* 1. 保证名字在最顶端且为斜体 */
         #main-title {
             text-align: center;
-            font-size: clamp(2rem, 8vw, 4rem);
-            margin-top: 20px;
+            font-size: clamp(2.5rem, 10vw, 5rem); /* 与首页大小一致 */
+            margin-top: 0;
+            padding-top: 20px;
             font-style: italic;
-            font-weight: normal; /* 确保不加粗 */
+            font-weight: normal;
         }
 
-        /* 导航栏布局 */
+        /* 2. 导航栏样式 */
         .nav-container .navigation {
             display: flex;
             justify-content: center;
@@ -25,51 +25,27 @@
             flex-wrap: wrap;
             margin-bottom: 40px;
         }
-        .navigation li { 
-            margin: 0 15px; 
-        }
+        .navigation li { margin: 0 15px; }
+        .navigation a { color: #004f63; text-decoration: none; }
+        .navigation a:hover { text-decoration: underline; }
 
-        /* 链接颜色 */
-        a {
-            color: #004f63;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* 核心内容容器 */
+        /* 3. 正文容器：去掉黑体，两端对齐 */
         .content-padding {
-            max-width: 900px; /* 限制最大宽度，避免在超宽屏上阅读困难 */
-            margin: 0 auto;   /* 居中 */
-            padding: 0 20px;  /* 手机端左右留白 */
-            line-height: 1.8; /* 增加行高方便阅读 */
-        }
-
-        /* 正文样式：去掉黑体，两端对齐 */
-        .research-text {
-            font-size: 20px;     /* 你要求的字号 */
-            font-weight: normal; /* 彻底去掉黑体/粗体效果 */
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-size: 20px;
+            font-weight: normal; /* 确保不是黑体 */
             text-align: justify; /* 两端对齐 */
-            color: #333;
-            margin-top: 30px;
-        }
-
-        /* 针对电脑大屏幕的页边距优化 */
-        @media (min-width: 1024px) {
-            .content-padding {
-                padding-left: 100px; 
-                padding-right: 100px;
-            }
+            line-height: 1.8;
+            color: black;
         }
     </style>
 </head>
 <body>
 
-    <!-- 顶部标题 -->
-    <h1 id="main-title">Research</h1>
+    <h1 id="main-title">Xiong Shi</h1>
 
-    <!-- 导航栏 -->
     <div class="nav-container">
         <ul class="navigation">
             <li><a href="index.html">Home</a></li>
@@ -79,19 +55,12 @@
         </ul>
     </div>
 
-    <!-- 正文内容 -->
     <div class="content-padding">
-        <div class="research-text">
-            I am deeply interested in how ongoing global changes individually and interactively influence plants, 
-            particularly in the context of coexistence between alien and native species. 
-            To address this question, we will employ a multifaceted approach, including meta-analysis, 
-            field studies, and greenhouse experiments.
-        </div>
+        I am deeply interested in how ongoing global changes individually and interactively influence plants, 
+        particularly in the context of coexistence between alien and native species. 
+        To address this question, we will employ a multifaceted approach, including meta-analysis, 
+        field studies, and greenhouse experiments.
     </div>
-
-    <footer style="text-align: center; margin-top: 80px; padding: 20px; color: #888;">
-        &copy; 2026 Xiong Shi
-    </footer>
 
 </body>
 </html>
