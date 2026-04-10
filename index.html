@@ -7,80 +7,43 @@
     <style>
         body { 
             font-family: 'Aptos', 'Segoe UI', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif; 
-            line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; color: black; 
+            line-height: 1.6; padding: 20px; max-width: 950px; margin: auto; color: black; 
         }
-        
         #main-title { 
-            text-align: center; 
-            font-size: clamp(3rem, 12vw, 6rem); 
-            font-style: italic; 
-            font-weight: bold; 
-            margin-top: 0;
-            margin-bottom: 20px;
+            text-align: center; font-size: clamp(3rem, 12vw, 6rem); 
+            font-style: italic; font-weight: bold; margin-top: 0; margin-bottom: 20px;
         }
-
-        /* 导航栏基础样式 */
         .nav-container { position: relative; width: 100%; }
         .navigation {
             display: flex; justify-content: center; list-style: none; padding: 0; flex-wrap: wrap;
-            margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 10px;
+            margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px;
         }
-        .navigation li { margin: 0 20px; }
-        .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.1rem; }
-        .navigation a:hover { text-decoration: underline; }
+        .navigation li { margin: 0 25px; }
+        .navigation a { 
+            text-decoration: none; color: inherit; font-weight: 500; 
+            font-size: 1.3rem; letter-spacing: 0.5px; transition: 0.3s;
+        }
+        .navigation a:hover { text-decoration: underline; opacity: 0.7; }
 
-        /* --- 汉堡菜单 CSS 绘图 (修正定位) --- */
         .menu-toggle {
-            display: none; /* 默认在电脑上隐藏 */
-            position: absolute;
-            right: 10px;
-            top: 20px; /* 调整了位置，确保它在标题行内显示 */
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 5px;
-            z-index: 100; /* 确保在最上层 */
+            display: none; position: absolute; right: 10px; top: 20px; 
+            cursor: pointer; background: none; border: none; padding: 5px; z-index: 100;
         }
-
-        .hamburger-lines {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 22px; 
-            width: 32px;
-        }
-
-        .line {
-            height: 3px;
-            width: 100%;
-            background-color: black;
-            border-radius: 10px;
-        }
+        .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
+        .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
         .image-container { text-align: center; margin: 40px auto; max-width: 450px; }
         .myImage { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-        .center-text { text-align: center; font-size: 1.3rem; padding: 0 10px; max-width: 750px; margin: 0 auto; }
-        .intro-paragraph { margin-bottom: 25px; line-height: 1.8; }
+        .center-text { text-align: center; font-size: 1.4rem; padding: 0 10px; max-width: 750px; margin: 0 auto; }
         footer { text-align: center; margin-top: 60px; font-size: 0.8em; color: #666; }
 
-        /* --- 手机端适配 (重要) --- */
-        @media (max-width: 768px) { /* 扩大了响应范围到 768px */
+        @media (max-width: 768px) {
             #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
-            
-            .menu-toggle { display: block; } /* 确保在这里显示出来 */
-            
+            .menu-toggle { display: block; }
             .navigation {
-                display: none; 
-                flex-direction: column;
-                text-align: center;
-                border-bottom: none;
-                background: #fdfdfd;
-                padding: 20px 0;
-                width: 100%;
+                display: none; flex-direction: column; text-align: center; border-bottom: none;
+                background: #fdfdfd; padding: 20px 0; width: 100%; position: absolute; top: 80px; left: 0;
                 box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-                position: absolute;
-                top: 80px; /* 菜单弹出的位置 */
-                left: 0;
             }
             .navigation.active { display: flex; }
             .navigation li { margin: 15px 0; }
@@ -88,18 +51,9 @@
     </style>
 </head>
 <body>
-
     <div class="nav-container">
         <h1 id="main-title">Xiong Shi</h1>
-        
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
-            <div class="hamburger-lines">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-            </div>
-        </button>
-        
+        <button class="menu-toggle" onclick="toggleMenu()"><div class="hamburger-lines"><span class="line"></span><span class="line"></span><span class="line"></span></div></button>
         <ul class="navigation" id="navMenu">
             <li><a href="index.html">Home</a></li>
             <li><a href="research.html">Research</a></li>
@@ -107,31 +61,13 @@
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
-
-    <div class="image-container">
-        <img src="sunset.jpg" alt="Xiong Shi" class="myImage">
-    </div>
-
+    <div class="image-container"><img src="sunset.jpg" alt="Xiong Shi" class="myImage"></div>
     <div class="center-text">
-      <p class="intro-paragraph">
-        I obtained my PhD from the University of Konstanz, supervised by 
+      <p>I obtained my PhD from the University of Konstanz, supervised by 
         <a href="https://www.biologie.uni-konstanz.de/kleunen/team/prof-dr-mark-van-kleunen/" style="color:inherit; font-weight: bold; text-decoration: underline;">Prof. Dr. Mark van Kleunen</a>. 
-        In May 2026, I will join Peking University as a Postdoctoral Fellow.
-      </p>
+        In May 2026, I will join Peking University as a Postdoctoral Fellow.</p>
     </div>
-
     <footer>&copy; 2026 Xiong Shi</footer>
-
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById("navMenu");
-            // 修正了 class 判断逻辑，确保更稳健
-            if (menu.classList.contains("active")) {
-                menu.classList.remove("active");
-            } else {
-                menu.classList.add("active");
-            }
-        }
-    </script>
+    <script>function toggleMenu() { var menu = document.getElementById("navMenu"); menu.classList.toggle("active"); }</script>
 </body>
 </html>
