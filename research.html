@@ -1,89 +1,97 @@
-<style>
-   #main-title {
-       text-align: center;
-       font-size: 5em;  
-       margin-top: 0;  
-       padding-top: 0;
-       font-style: italic;
-   }
-</style>
-
-
-<h1 id="main-title">Xiong Shi</h1>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>Research | Xiong Shi</title>
     <link rel="stylesheet" href="styles.css">
-</head>
+    
+    <style>
+        /* 顶部大标题样式 */
+        #main-title {
+            text-align: center;
+            font-size: clamp(2rem, 8vw, 4rem);
+            margin-top: 20px;
+            font-style: italic;
+            font-weight: normal; /* 确保不加粗 */
+        }
 
+        /* 导航栏布局 */
+        .nav-container .navigation {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .navigation li { 
+            margin: 0 15px; 
+        }
+
+        /* 链接颜色 */
+        a {
+            color: #004f63;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 核心内容容器 */
+        .content-padding {
+            max-width: 900px; /* 限制最大宽度，避免在超宽屏上阅读困难 */
+            margin: 0 auto;   /* 居中 */
+            padding: 0 20px;  /* 手机端左右留白 */
+            line-height: 1.8; /* 增加行高方便阅读 */
+        }
+
+        /* 正文样式：去掉黑体，两端对齐 */
+        .research-text {
+            font-size: 20px;     /* 你要求的字号 */
+            font-weight: normal; /* 彻底去掉黑体/粗体效果 */
+            text-align: justify; /* 两端对齐 */
+            color: #333;
+            margin-top: 30px;
+        }
+
+        /* 针对电脑大屏幕的页边距优化 */
+        @media (min-width: 1024px) {
+            .content-padding {
+                padding-left: 100px; 
+                padding-right: 100px;
+            }
+        }
+    </style>
+</head>
 <body>
+
+    <!-- 顶部标题 -->
+    <h1 id="main-title">Research</h1>
+
+    <!-- 导航栏 -->
     <div class="nav-container">
         <ul class="navigation">
-            <li><a href="/">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="research.html">Research</a></li>
             <li><a href="publication.html">Publication</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
 
+    <!-- 正文内容 -->
+    <div class="content-padding">
+        <div class="research-text">
+            I am deeply interested in how ongoing global changes individually and interactively influence plants, 
+            particularly in the context of coexistence between alien and native species. 
+            To address this question, we will employ a multifaceted approach, including meta-analysis, 
+            field studies, and greenhouse experiments.
+        </div>
+    </div>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Reaearch</title>
-    
-    <!-- 确保 "styles.css" 是正确的路径 -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- 内部CSS应放在 <style> 标签中 -->
-    <style>
-        a {
-            color:#004f63; 
-            text-decoration: none; /* 可选：如果不想显示下划线 */
-        }
-
-        a:hover {
-            text-decoration: underline; /* 可选：鼠标悬停时下划线 */
-        }
-
-        /* 设置文本的容器边距 */
-        .content-padding {
-            padding-left: 250px; /* 左侧留出空间 */
-            padding-right: 250px; /* 右侧留出空间 */
-        }
-       p {
-            text-align: justify;
-        }
-    </style>
-
-</head>
-<body>
-
-<!-- 这里是你的页面内容，确保使用了上述CSS类的元素 -->
-<!-- 示例 -->
-<div class="content-padding">
-    <!-- 你的内容 -->
-</div>
-
-</body>
-</html>
-
-</head>
-<body>
-
-<div class="content-padding content-justify" style="font-size:18px; text-align:left;">
-
-    <h1>
-      I am deeply interested in how ongoing global changes individually and interactively influence plants, 
-        particularly in the context of coexistence between alien and native species. 
-        To address this question, we will employ a multifaceted approach, including meta-analysis, 
-        field studies, and greenhouse experiments.</a></h1>
-
-
+    <footer style="text-align: center; margin-top: 80px; padding: 20px; color: #888;">
+        &copy; 2026 Xiong Shi
+    </footer>
 
 </body>
 </html>
