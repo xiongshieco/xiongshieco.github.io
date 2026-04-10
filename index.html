@@ -27,11 +27,31 @@
         .navigation a { text-decoration: none; color: inherit; font-weight: 500; }
         .navigation a:hover { text-decoration: underline; }
 
-        .image-container { text-align: center; margin: 30px 0; }
-        .myImage { max-width: 100%; height: auto; border-radius: 4px; }
+        /* 优化图片容器：限制最大宽度为 400px，并水平居中 */
+        .image-container { 
+            text-align: center; 
+            margin: 30px auto; 
+            max-width: 400px; 
+        }
+        .myImage { 
+            width: 100%; /* 占据容器的 100% */
+            height: auto; 
+            border-radius: 8px; /* 稍微圆润一点更专业 */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 加一点阴影更有质感 */
+        }
 
         .center-text { text-align: center; font-size: 1.2rem; }
-        .center-text h1 { font-size: inherit; font-weight: normal; }
+        .center-text h1 { font-size: inherit; font-weight: normal; margin-bottom: 15px; }
+        
+        /* 突出北大博后的信息 */
+        .new-position {
+            font-size: 1.1rem;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 4px;
+        }
         
         footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #666; }
     </style>
@@ -52,9 +72,14 @@
     </div>
 
     <div class="center-text">
-      <h1>I am <a href="https://www.biologie.uni-konstanz.de/kleunen/team/phd-and-master-students/xiong-shi/" style="color:inherit;">Xiong Shi</a>, 
+      <h1>I am <a href="https://www.biologie.uni-konstanz.de/kleunen/team/phd-and-master-students/xiong-shi/" style="color:inherit; font-weight: bold;">Xiong Shi</a>, 
         a PhD student supervised by
-        <a href="https://www.biologie.uni-konstanz.de/kleunen/team/prof-dr-mark-van-kleunen/" style="color:inherit;">Mark van Kleunen</a></h1>
+        <a href="https://www.biologie.uni-konstanz.de/kleunen/team/prof-dr-mark-van-kleunen/" style="color:inherit; font-weight: bold;">Mark van Kleunen</a> at the University of Konstanz.</h1>
+      
+      <!-- 新增入职北大博后的介绍 -->
+      <p class="new-position">
+        I will soon join <strong>Peking University</strong> as a Postdoctoral Fellow.
+      </p>
     </div>
 
     <footer>&copy; 2026 Xiong Shi</footer>
