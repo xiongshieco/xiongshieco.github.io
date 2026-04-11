@@ -8,21 +8,22 @@
         body { font-family: 'Aptos', sans-serif; line-height: 1.6; padding: 20px; max-width: 950px; margin: auto; color: black; }
         #main-title { text-align: center; font-size: clamp(3rem, 12vw, 6rem); font-style: italic; font-weight: bold; margin-bottom: 20px; }
         .nav-container { position: relative; width: 100%; }
-        .navigation { display: flex; justify-content: right; list-style: none; padding: 0; margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        
+        /* 电脑端导航居中，与首页一致 */
+        .navigation { display: flex; justify-content: center; list-style: none; padding: 0; margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
         .navigation li { margin: 0 25px; }
         .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.3rem; }
+        .navigation a:hover { text-decoration: underline; }
         
-        .menu-toggle { display: none; position: absolute; right: 10px; top: 20px; cursor: pointer; background: none; border: none; }
+        .menu-toggle { display: block; position: absolute; right: 10px; top: 20px; cursor: pointer; background: none; border: none; z-index: 100; display: none; }
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
-        /* --- 核心优化部分 --- */
         .contact-content { 
             text-align: center; 
             margin-top: 80px; 
             font-size: 1.5rem; 
             padding: 0 10px;
-            /* 关键：防止长字符串溢出 */
             word-break: break-all; 
         }
         .email-link {
@@ -44,16 +45,30 @@
 
         .back-home { margin-top: 60px; font-size: 1rem; }
 
+        /* 手机端适配：修正拼写并改为右对齐 */
         @media (max-width: 768px) {
             #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
             .menu-toggle { display: block; }
-            .navigation { display: none; flex-direction: colurightmn; text-align: right; position: absolute; top: 80px; width: 100%; background: #fdfdfd; padding: 20px 0; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+            .navigation { 
+                display: none; 
+                flex-direction: column; /* 修正了原本的拼写错误 */
+                text-align: right; 
+                padding-right: 25px; 
+                position: absolute; 
+                top: 80px; 
+                width: 100%; 
+                background: #fdfdfd; 
+                padding-top: 20px;
+                padding-bottom: 20px;
+                z-index: 10; 
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+                border-bottom: none;
+            }
             .navigation.active { display: flex; }
             .navigation li { margin: 15px 0; }
             
-            /* 手机端稍微缩小字号，增加换行灵活性 */
             .contact-content { font-size: 1.2rem; margin-top: 40px; }
-            .email-divider { display: block; height: 10px; visibility: hidden; } /* 手机端让斜杠消失并换行 */
+            .email-divider { display: block; height: 10px; visibility: hidden; } 
         }
     </style>
 </head>
@@ -71,9 +86,9 @@
 
     <div class="contact-content">
         <strong>Email:</strong><br>
-        <a href="mailto:xxxx@uni-konstanz.de" class="email-link">shi.xiong@uni-konstanz.de</a>
+        <a href="mailto:xxxx@uni-konstanz.de" class="email-link">xxxx@uni-konstanz.de</a>
         <span class="email-divider">/</span>
-        <a href="mailto:xxxxxxx@gmail.com" class="email-link">shixiongsnnu@gmail.com</a>
+        <a href="mailto:xxxxxxx@gmail.com" class="email-link">xxxxxxx@gmail.com</a>
         
         <div class="back-home">
             <a href="index.html" style="color:inherit; text-decoration:none;">← Return to Main Page</a>
