@@ -9,7 +9,7 @@
         #main-title { text-align: center; font-size: clamp(3rem, 12vw, 6rem); font-style: italic; font-weight: bold; margin-bottom: 20px; }
         .nav-container { position: relative; width: 100%; }
         
-        /* 导航栏：电脑端居中显示，更符合审美 */
+        /* 导航栏：电脑端居中 */
         .navigation { display: flex; justify-content: center; list-style: none; padding: 0; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
         .navigation li { margin: 0 25px; }
         .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.3rem; letter-spacing: 0.5px; }
@@ -19,7 +19,7 @@
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
         
-        /* 年份区块间距优化 */
+        /* 时间轴样式 */
         .year-section { margin-top: 50px; margin-bottom: 40px; }
         .year-label { 
             font-size: 1.8rem; 
@@ -34,6 +34,7 @@
         .pub-list { list-style: none; padding: 0; max-width: 850px; margin: 0 auto; }
         .pub-list li { margin-bottom: 25px; text-align: justify; }
         
+        /* 名字高亮：无下划线 */
         .my-name { 
             font-weight: bold !important; 
             text-decoration: none !important; 
@@ -48,7 +49,7 @@
             text-align: center;
             font-size: 1.5rem;
             font-weight: bold;
-            margin: 80px 0 30px; /* 增加顶部间距 */
+            margin: 80px 0 30px; 
             color: #666;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -56,7 +57,6 @@
             padding-top: 30px;
         }
 
-        /* 手机端适配：已修正大括号问题 */
         @media (max-width: 768px) {
             #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
             .menu-toggle { display: block; } 
@@ -92,7 +92,8 @@
         </ul>
     </div>
 
-    <div class="year-section" style="margin-top: 20px;"> <span class="year-label">2026</span>
+    <div class="year-section" style="margin-top: 20px;"> 
+        <span class="year-label">2026</span>
         <ul class="pub-list">
             <li><span class="my-name">Shi X</span>, Chen D* & van Kleunen M (2026) The dominance of non-native plants over native plants increases with the number of global change factors. <span class="journal-name">Oikos</span>, accepted.</li>
         </ul>
@@ -117,4 +118,44 @@
     <div class="year-section">
         <span class="year-label">2022</span>
         <ul class="pub-list">
-            <li><span class="my-name">Shi X</span>, Liao ZY & Zheng YL* (2022) Effects of warming and nutrient fluctuation on invader <em>Chromolaena odorata</em> and natives in artificial communities. <span class="journal-name">Plant Ecology</span>, 223: 315-322. <br><a class="doi-link" href="https://doi.org/10.1007/s11258-021-01210-9">
+            <li><span class="my-name">Shi X</span>, Liao ZY & Zheng YL* (2022) Effects of warming and nutrient fluctuation on invader <em>Chromolaena odorata</em> and natives in artificial communities. <span class="journal-name">Plant Ecology</span>, 223: 315-322. <br><a class="doi-link" href="https://doi.org/10.1007/s11258-021-01210-9">https://doi.org/10.1007/s11258-021-01210-9</a></li>
+        </ul>
+    </div>
+
+    <div class="year-section">
+        <span class="year-label">2021</span>
+        <ul class="pub-list">
+            <li><span class="my-name">Shi X</span>, Li WT*, Zheng YL* (2021) Soil legacy effect of extreme precipitation on a tropical invader in different land use types. <span class="journal-name">Environmental and Experimental Botany</span>, 191: 104625. <br><a class="doi-link" href="https://doi.org/10.1016/j.envexpbot.2021.104625">https://doi.org/10.1016/j.envexpbot.2021.104625</a></li>
+        </ul>
+    </div>
+
+    <div class="year-section">
+        <span class="year-label">2020</span>
+        <ul class="pub-list">
+            <li><span class="my-name">Shi X</span>, Liu G & Zheng YL* (2020) Comparisons of irradiance utilization efficiency by invasive <em>Chromolaena odorata</em> and its three co-occurring species in one planted understory. <span class="journal-name">Flora</span>, 271: 151680. <br><a class="doi-link" href="https://doi.org/10.1016/j.flora.2020.151680">https://doi.org/10.1016/j.flora.2020.151680</a></li>
+        </ul>
+    </div>
+
+    <div class="co-author-title">Co-authored Papers</div>
+
+    <div class="year-section">
+        <span class="year-label">2022</span>
+        <ul class="pub-list">
+            <li>Li WT, Zheng YL*, Wang RF, Wang ZY, Liu YM, <span class="my-name">Shi X</span>, Liao ZY, Li YP, Feng YL (2022) Shifts in chemical and microbiological properties belowground of invader <em>Ageratina adenophora</em> along an altitudinal gradient. <span class="journal-name">Journal of Plant Ecology</span>, 15: 1121–1132. <br><a class="doi-link" href="https://doi.org/10.1093/jpe/rtac003">https://doi.org/10.1093/jpe/rtac003</a></li>
+        </ul>
+    </div>
+
+    <div class="year-section">
+        <span class="year-label">2018</span>
+        <ul class="pub-list">
+            <li>Yang YB, Liu G*, <span class="my-name">Shi X</span>, Zhang WG, Cai XW, Ren ZL, Yao NN, Zhu ZH*, Nie H (2018) Where will invasive plants colonize in response to climate change: predicting the invasion of <em>Galinsoga quadriradiata</em> in China. <span class="journal-name">International Journal of Environmental Research</span>, 12: 929–938. <br><a class="doi-link" href="https://doi.org/10.1007/s41742-018-0146-3">https://doi.org/10.1007/s41742-018-0146-3</a></li>
+        </ul>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("navMenu").classList.toggle("active");
+        }
+    </script>
+</body>
+</html>
