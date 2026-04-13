@@ -33,10 +33,10 @@
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
-        /* --- 轮播图外层容器 --- */
+        /* --- 轮播图主体 --- */
         .slider-container {
             max-width: 450px;
-            margin: 40px auto 10px; /* 底部留出间距给图注 */
+            margin: 40px auto 10px;
             position: relative;
         }
 
@@ -58,13 +58,14 @@
         .image-slider img {
             width: 100%;
             flex-shrink: 0;
-            height: auto;
+            /* --- 修改点：统一高度，防止内容抖动 --- */
+            height: 300px; 
             object-fit: cover;
+            /* ---------------------------------- */
             user-select: none;
             -webkit-user-drag: none;
         }
 
-        /* 按钮样式 */
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(255,255,255,0.8); border: none; width: 32px; height: 32px;
@@ -77,7 +78,6 @@
         .btn-prev { left: 10px; }
         .btn-next { right: 10px; }
 
-        /* --- 修改后的图注样式 --- */
         .slider-hint { 
             text-align: center; 
             font-size: 0.85rem; 
@@ -102,7 +102,9 @@
             }
             .navigation.active { display: flex; }
             .navigation li { margin: 15px 0; }
-            .nav-btn { display: none; } /* 移动端隐藏按钮 */
+            .nav-btn { display: none; }
+            /* 手机端图片高度可适当调低 */
+            .image-slider img { height: 250px; }
         }
     </style>
 </head>
@@ -146,7 +148,6 @@
         document.getElementById("year").textContent = new Date().getFullYear();
         function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
 
-        // --- 无限轮播逻辑 ---
         const slider = document.getElementById('slider');
         const wrapper = document.getElementById('wrapper');
         const nextBtn = document.getElementById('nextBtn');
@@ -156,6 +157,7 @@
         let counter = 1;
         const size = 100; 
 
+        // 无限轮播初始化
         const firstClone = slides[0].cloneNode(true);
         const lastClone = slides[slides.length - 1].cloneNode(true);
         slider.appendChild(firstClone);
@@ -194,7 +196,7 @@
             }
         });
 
-        // --- 拖拽支持 ---
+        // 交互逻辑
         let isDragging = false, startPos = 0;
 
         wrapper.addEventListener('mousedown', dragStart);
@@ -218,7 +220,7 @@
             slider.style.transform = `translateX(${-size * counter + diff}%)`;
         }
 
-        function dragEnd() {
+        function dragEnd(e) {
             if (!isDragging) return;
             isDragging = false;
             const movedBy = (parseFloat(slider.style.transform.replace('translateX(', '')) + (counter * size));
