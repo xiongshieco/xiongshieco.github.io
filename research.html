@@ -28,8 +28,11 @@
             width: 100%;
             height: auto;
             border-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* 加一点点阴影更有质感 */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
+
+        /* 页脚样式 */
+        footer { text-align: center; margin-top: 80px; font-size: 0.8em; color: #666; padding-bottom: 20px; }
 
         /* 手机端适配：修正为右对齐 */
         @media (max-width: 768px) {
@@ -38,8 +41,8 @@
             .navigation { 
                 display: none; 
                 flex-direction: column; 
-                text-align: right;    /* 右对齐菜单文字 */
-                padding-right: 25px;  /* 留出间距 */
+                text-align: right;    
+                padding-right: 25px;  
                 position: absolute; 
                 top: 80px; 
                 width: 100%; 
@@ -47,7 +50,7 @@
                 padding-top: 20px; 
                 padding-bottom: 20px; 
                 border-bottom: none;
-                z-index: 10;
+                z-index: 50; /* 确保在内容之上 */
                 box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             }
             .navigation.active { display: flex; }
@@ -74,6 +77,19 @@
         To address this, I employ a multifaceted approach, including meta-analysis, field studies, and greenhouse experiments. Building on this, I am currently extending my research into two key components: (1) how multiple global change factors influence biodiversity–ecosystem functioning (BEF) relationships, and (2) how non-native plant species shift their life-history or functional traits in introduced ranges (compared to their native ranges)?
     </div>
 
-    <script>function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }</script>
+    <footer>&copy; <span id="year"></span> Xiong Shi</footer>
+
+    <script>
+        // 1. 自动更新当前年份
+        const yearElement = document.getElementById("year");
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+
+        // 2. 菜单切换函数
+        function toggleMenu() { 
+            document.getElementById("navMenu").classList.toggle("active"); 
+        }
+    </script>
 </body>
 </html>
