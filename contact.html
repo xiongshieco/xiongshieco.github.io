@@ -9,13 +9,13 @@
         #main-title { text-align: center; font-size: clamp(3rem, 12vw, 6rem); font-style: italic; font-weight: bold; margin-bottom: 20px; }
         .nav-container { position: relative; width: 100%; }
         
-        /* 电脑端导航居中，与首页一致 */
+        /* 电脑端导航居中 */
         .navigation { display: flex; justify-content: center; list-style: none; padding: 0; margin-bottom: 50px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
         .navigation li { margin: 0 25px; }
         .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.3rem; }
         .navigation a:hover { text-decoration: underline; }
         
-        .menu-toggle { display: block; position: absolute; right: 10px; top: 20px; cursor: pointer; background: none; border: none; z-index: 100; display: none; }
+        .menu-toggle { display: none; position: absolute; right: 10px; top: 20px; cursor: pointer; background: none; border: none; z-index: 100; }
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
@@ -43,15 +43,15 @@
             color: #ccc;
         }
 
-        .back-home { margin-top: 60px; font-size: 1rem; }
+        /* 页脚样式 */
+        footer { text-align: center; margin-top: 80px; font-size: 0.8em; color: #666; padding-bottom: 20px; }
 
-        /* 手机端适配：修正拼写并改为右对齐 */
         @media (max-width: 768px) {
             #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
             .menu-toggle { display: block; }
             .navigation { 
                 display: none; 
-                flex-direction: column; /* 修正了原本的拼写错误 */
+                flex-direction: column; 
                 text-align: right; 
                 padding-right: 25px; 
                 position: absolute; 
@@ -86,15 +86,24 @@
 
     <div class="contact-content">
         <strong>Email:</strong><br>
-        <a href="mailto:xxxx@uni-konstanz.de" class="email-link">shi.xiong@uni-konstanz.de</a>
+        <a href="mailto:shi.xiong@uni-konstanz.de" class="email-link">shi.xiong@uni-konstanz.de</a>
         <span class="email-divider">/</span>
-        <a href="mailto:xxxxxxx@gmail.com" class="email-link">shixiongsnnu@gmail.com</a>
-        
-        <div class="back-home">
-            <a href="index.html" style="color:inherit; text-decoration:none;">← Return to Main Page</a>
-        </div>
+        <a href="mailto:shixiongsnnu@gmail.com" class="email-link">shixiongsnnu@gmail.com</a>
     </div>
 
-    <script>function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }</script>
+    <footer>&copy; <span id="year"></span> Xiong Shi</footer>
+
+    <script>
+        // 1. 自动更新当前年份
+        const yearElement = document.getElementById("year");
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+
+        // 2. 手机端菜单切换
+        function toggleMenu() {
+            document.getElementById("navMenu").classList.toggle("active");
+        }
+    </script>
 </body>
 </html>
