@@ -14,6 +14,8 @@
             font-style: italic; font-weight: bold; margin-top: 0; margin-bottom: 20px;
         }
         .nav-container { position: relative; width: 100%; }
+        
+        /* 导航栏样式：电脑端居中 */
         .navigation {
             display: flex; justify-content: center; list-style: none; padding: 0; flex-wrap: wrap;
             margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px;
@@ -25,6 +27,7 @@
         }
         .navigation a:hover { text-decoration: underline; opacity: 0.7; }
 
+        /* 手机端菜单开关按钮 */
         .menu-toggle {
             display: none; position: absolute; right: 10px; top: 20px; 
             cursor: pointer; background: none; border: none; padding: 5px; z-index: 100;
@@ -32,12 +35,16 @@
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
+        /* 个人图片控制 */
         .image-container { text-align: center; margin: 40px auto; max-width: 450px; }
         .myImage { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+        
+        /* 正文文字样式 */
         .center-text { text-align: center; font-size: 1.4rem; padding: 0 10px; max-width: 750px; margin: 0 auto; }
+        
         footer { text-align: center; margin-top: 60px; font-size: 0.8em; color: #666; }
 
-        /* --- 手机端适配：修正为右对齐 --- */
+        /* 手机端适配：修正为右对齐 */
         @media (max-width: 768px) {
             #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
             
@@ -46,10 +53,8 @@
             .navigation {
                 display: none; 
                 flex-direction: column; 
-                /* --- 核心修改：改为右对齐 --- */
-                text-align: right; 
-                padding-right: 25px; /* 给右侧留出呼吸感间距 */
-                /* ------------------------ */
+                text-align: right;    /* 右对齐文字 */
+                padding-right: 25px;  /* 距离右边缘间距 */
                 border-bottom: none;
                 background: #fdfdfd; 
                 padding-top: 20px;
@@ -59,6 +64,7 @@
                 top: 80px; 
                 left: 0;
                 box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                z-index: 50;
             }
             .navigation.active { display: flex; }
             .navigation li { margin: 15px 0; }
@@ -68,7 +74,15 @@
 <body>
     <div class="nav-container">
         <h1 id="main-title">Xiong Shi</h1>
-        <button class="menu-toggle" onclick="toggleMenu()"><div class="hamburger-lines"><span class="line"></span><span class="line"></span><span class="line"></span></div></button>
+        
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <div class="hamburger-lines">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </button>
+
         <ul class="navigation" id="navMenu">
             <li><a href="index.html">Home</a></li>
             <li><a href="research.html">Research</a></li>
@@ -76,13 +90,28 @@
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
-    <div class="image-container"><img src="sunset.jpg" alt="Xiong Shi" class="myImage"></div>
+
+    <div class="image-container">
+        <img src="sunset.jpg" alt="Xiong Shi" class="myImage">
+    </div>
+
     <div class="center-text">
       <p>I obtained my PhD from the University of Konstanz, supervised by 
         <a href="https://www.biologie.uni-konstanz.de/kleunen/team/prof-dr-mark-van-kleunen/" style="color:inherit; font-weight: bold; text-decoration: underline;">Prof. Dr. Mark van Kleunen</a>. 
         In May 2026, I will join Peking University as a Postdoctoral Fellow.</p>
     </div>
-    <footer>&copy; 2026 Xiong Shi</footer>
-    <script>function toggleMenu() { var menu = document.getElementById("navMenu"); menu.classList.toggle("active"); }</script>
+
+    <footer>&copy; <span id="year"></span> Xiong Shi</footer>
+
+    <script>
+        // 1. 自动更新年份脚本
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // 2. 手机端菜单切换脚本
+        function toggleMenu() { 
+            var menu = document.getElementById("navMenu"); 
+            menu.classList.toggle("active"); 
+        }
+    </script>
 </body>
 </html>
