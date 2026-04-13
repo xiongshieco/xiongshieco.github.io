@@ -57,6 +57,9 @@
             padding-top: 30px;
         }
 
+        /* 页脚样式 */
+        footer { text-align: center; margin-top: 80px; font-size: 0.8em; color: #666; padding-bottom: 20px; }
+
         @media (max-width: 768px) {
             #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
             .menu-toggle { display: block; } 
@@ -152,9 +155,19 @@
         </ul>
     </div>
 
+    <footer>&copy; <span id="year"></span> Xiong Shi</footer>
+
     <script>
+        // 1. 自动更新当前年份
+        const yearElement = document.getElementById("year");
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+
+        // 2. 手机端导航切换
         function toggleMenu() {
-            document.getElementById("navMenu").classList.toggle("active");
+            var menu = document.getElementById("navMenu");
+            menu.classList.toggle("active");
         }
     </script>
 </body>
