@@ -15,7 +15,6 @@
         }
         .nav-container { position: relative; width: 100%; }
         
-        /* 导航栏样式：电脑端居中 */
         .navigation {
             display: flex; justify-content: center; list-style: none; padding: 0; flex-wrap: wrap;
             margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px;
@@ -27,7 +26,6 @@
         }
         .navigation a:hover { text-decoration: underline; opacity: 0.7; }
 
-        /* 手机端菜单开关按钮 */
         .menu-toggle {
             display: none; position: absolute; right: 10px; top: 20px; 
             cursor: pointer; background: none; border: none; padding: 5px; z-index: 100;
@@ -35,26 +33,55 @@
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
-        /* 个人图片控制 */
-        .image-container { text-align: center; margin: 40px auto; max-width: 450px; }
-        .myImage { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-        
-        /* 正文文字样式 */
+        /* --- 核心修改：滑动图片容器 --- */
+        .slider-wrapper {
+            max-width: 450px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .image-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory; /* 强制对齐 */
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* 隐藏火狐滚动条 */
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .image-slider::-webkit-scrollbar {
+            display: none; /* 隐藏 Chrome/Safari 滚动条 */
+        }
+
+        .image-slider img {
+            width: 100%;
+            flex-shrink: 0; /* 防止图片被压缩 */
+            scroll-snap-align: start; /* 每次滑动停止在图片开头 */
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* 滑动提示点（可选） */
+        .slider-hint {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 10px;
+        }
+
         .center-text { text-align: center; font-size: 1.4rem; padding: 0 10px; max-width: 750px; margin: 0 auto; }
-        
         footer { text-align: center; margin-top: 60px; font-size: 0.8em; color: #666; }
 
-        /* 手机端适配：修正为右对齐 */
         @media (max-width: 768px) {
             #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
-            
             .menu-toggle { display: block; }
-            
             .navigation {
                 display: none; 
                 flex-direction: column; 
-                text-align: right;    /* 右对齐文字 */
-                padding-right: 25px;  /* 距离右边缘间距 */
+                text-align: right;    
+                padding-right: 25px;  
                 border-bottom: none;
                 background: #fdfdfd; 
                 padding-top: 20px;
@@ -74,15 +101,11 @@
 <body>
     <div class="nav-container">
         <h1 id="main-title">Xiong Shi</h1>
-        
         <button class="menu-toggle" onclick="toggleMenu()">
             <div class="hamburger-lines">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
+                <span class="line"></span><span class="line"></span><span class="line"></span>
             </div>
         </button>
-
         <ul class="navigation" id="navMenu">
             <li><a href="index.html">Home</a></li>
             <li><a href="research.html">Research</a></li>
@@ -91,8 +114,12 @@
         </ul>
     </div>
 
-    <div class="image-container">
-        <img src="sunset.jpg" alt="Xiong Shi" class="myImage">
+    <div class="slider-wrapper">
+        <div class="image-slider">
+            <img src="sunset.jpg" alt="Photo 1">
+            <img src="sunset_duck.jpg" alt="Photo 2">
+        </div>
+        <div class="slider-hint">← Swipe to view photos →</div>
     </div>
 
     <div class="center-text">
@@ -104,10 +131,7 @@
     <footer>&copy; <span id="year"></span> Xiong Shi</footer>
 
     <script>
-        // 1. 自动更新年份脚本
         document.getElementById("year").textContent = new Date().getFullYear();
-
-        // 2. 手机端菜单切换脚本
         function toggleMenu() { 
             var menu = document.getElementById("navMenu"); 
             menu.classList.toggle("active"); 
