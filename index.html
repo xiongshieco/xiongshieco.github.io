@@ -33,41 +33,33 @@
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
-        /* --- 图片轮播容器 --- */
+        /* --- 无限轮播容器 --- */
         .slider-wrapper {
             max-width: 450px;
             margin: 40px auto;
             position: relative;
-            /* 鼠标移入变小抓手手势，提示可以拖动 */
             cursor: grab;
+            overflow: hidden; /* 必须隐藏溢出 */
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
         }
         .slider-wrapper:active { cursor: grabbing; }
 
         .image-slider {
             display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; 
-            border-radius: 8px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease-in-out; /* 关键：使用位移实现动画 */
+            width: 100%;
         }
-
-        .image-slider::-webkit-scrollbar { display: none; }
 
         .image-slider img {
             width: 100%;
             flex-shrink: 0;
-            scroll-snap-align: start;
             height: auto;
             object-fit: cover;
-            /* 防止拖动图片本身产生干扰 */
             user-select: none;
             -webkit-user-drag: none;
         }
 
-        /* 左右切换按钮（电脑端常用） */
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(255,255,255,0.7); border: none; width: 35px; height: 35px;
@@ -76,8 +68,8 @@
             transition: 0.3s;
         }
         .nav-btn:hover { background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-        .btn-prev { left: -18px; }
-        .btn-next { right: -18px; }
+        .btn-prev { left: 10px; }
+        .btn-next { right: 10px; }
 
         .slider-hint { text-align: center; font-size: 0.8rem; color: #999; margin-top: 10px; }
 
@@ -96,7 +88,7 @@
             }
             .navigation.active { display: flex; }
             .navigation li { margin: 15px 0; }
-            .nav-btn { display: none; } /* 手机端隐藏按钮，使用原生滑动 */
+            .nav-btn { display: none; }
         }
     </style>
 </head>
@@ -114,14 +106,14 @@
         </ul>
     </div>
 
-    <div class="slider-wrapper">
-        <button class="nav-btn btn-prev" onclick="moveSlider(-1)">&#10094;</button>
+    <div class="slider-wrapper" id="wrapper">
+        <button class="nav-btn btn-prev" id="prevBtn">&#10094;</button>
         <div class="image-slider" id="slider">
             <img src="sunset.jpg" alt="Photo 1">
             <img src="sunset_duck.jpg" alt="Photo 2">
-            <img src="edinburgh.jpg" alt="Photo 2">
+            <img src="edinburgh.jpg" alt="Photo 3">
         </div>
-        <button class="nav-btn btn-next" onclick="moveSlider(1)">&#10095;</button>
+        <button class="nav-btn btn-next" id="nextBtn">&#10095;</button>
         <div class="slider-hint">Swipe or Drag to explore</div>
     </div>
 
@@ -142,33 +134,96 @@
             document.getElementById("navMenu").classList.toggle("active"); 
         }
 
-        // 3. 按钮点击滑动
+        // --- 3. 无限轮播逻辑 ---
         const slider = document.getElementById('slider');
-        function moveSlider(direction) {
-            const scrollAmount = slider.clientWidth;
-            slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        const wrapper = document.getElementById('wrapper');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        let slides = document.querySelectorAll('.image-slider img');
+
+        let counter = 1;
+        const size = 100; // 每次移动 100%
+
+        // 克隆第一张和最后一张图片，实现无缝循环
+        const firstClone = slides[0].cloneNode(true);
+        const lastClone = slides[slides.length - 1].cloneNode(true);
+
+        slider.appendChild(firstClone);
+        slider.insertBefore(lastClone, slides[0]);
+
+        // 重新获取包含克隆节点的图片组
+        const allSlides = document.querySelectorAll('.image-slider img');
+        slider.style.transform = 'translateX(' + (-size * counter) + '%)';
+
+        function moveNext() {
+            if (counter >= allSlides.length - 1) return;
+            slider.style.transition = "transform 0.5s ease-in-out";
+            counter++;
+            slider.style.transform = 'translateX(' + (-size * counter) + '%)';
         }
 
-        // 4. 电脑端鼠标拖拽实现
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+        function movePrev() {
+            if (counter <= 0) return;
+            slider.style.transition = "transform 0.5s ease-in-out";
+            counter--;
+            slider.style.transform = 'translateX(' + (-size * counter) + '%)';
+        }
 
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.remove('scroll-behavior-smooth'); // 拖拽时关闭平滑滚动防止冲突
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
+        nextBtn.addEventListener('click', moveNext);
+        prevBtn.addEventListener('click', movePrev);
+
+        // 核心：监听动画结束，处理瞬间跳转
+        slider.addEventListener('transitionend', () => {
+            if (allSlides[counter].src === firstClone.src && counter === allSlides.length - 1) {
+                slider.style.transition = "none";
+                counter = 1;
+                slider.style.transform = 'translateX(' + (-size * counter) + '%)';
+            }
+            if (allSlides[counter].src === lastClone.src && counter === 0) {
+                slider.style.transition = "none";
+                counter = allSlides.length - 2;
+                slider.style.transform = 'translateX(' + (-size * counter) + '%)';
+            }
         });
-        slider.addEventListener('mouseleave', () => { isDown = false; });
-        slider.addEventListener('mouseup', () => { isDown = false; });
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; // 乘2增加拖动感
-            slider.scrollLeft = scrollLeft - walk;
-        });
+
+        // --- 4. 拖拽支持 (电脑与手机通用) ---
+        let isDragging = false, startPos = 0, currentTranslate = 0, prevTranslate = 0;
+
+        wrapper.addEventListener('mousedown', dragStart);
+        wrapper.addEventListener('touchstart', dragStart);
+        wrapper.addEventListener('mousemove', dragMove);
+        wrapper.addEventListener('touchmove', dragMove);
+        wrapper.addEventListener('mouseup', dragEnd);
+        wrapper.addEventListener('touchend', dragEnd);
+        wrapper.addEventListener('mouseleave', dragEnd);
+
+        function dragStart(e) {
+            isDragging = true;
+            startPos = getPositionX(e);
+            slider.style.transition = "none";
+        }
+
+        function dragMove(e) {
+            if (!isDragging) return;
+            const currentPosition = getPositionX(e);
+            const diff = (currentPosition - startPos) / wrapper.offsetWidth * 100;
+            slider.style.transform = `translateX(${-size * counter + diff}%)`;
+        }
+
+        function dragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            const movedBy = (parseFloat(slider.style.transform.replace('translateX(', '')) + (counter * size));
+            
+            slider.style.transition = "transform 0.5s ease-in-out";
+            if (movedBy < -15) moveNext();
+            else if (movedBy > 15) movePrev();
+            else slider.style.transform = `translateX(${-size * counter}%)`;
+        }
+
+        function getPositionX(e) {
+            return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        }
     </script>
 </body>
 </html>
