@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xiong Shi - Home</title>
     <style>
-        /* 基础样式与重置 */
         body { 
             font-family: 'Aptos', 'Segoe UI', 'Ubuntu', sans-serif; 
             line-height: 1.7; margin: 0; padding: 0; color: black; 
             overflow-x: hidden;
         }
 
-        /* 顶部全屏宽度装饰层 */
+        /* 顶部导航全屏宽度 */
         .header-section {
             width: 100%;
             border-bottom: 1px solid #eee;
@@ -20,23 +19,19 @@
             margin-bottom: 40px;
         }
 
-        /* 标题动态大小 */
         #main-title { 
-            text-align: center; 
-            font-size: clamp(3rem, 8vw, 5.5rem); 
-            font-style: italic; 
-            font-weight: bold; 
-            margin: 0;
+            text-align: center; font-size: clamp(3rem, 8vw, 5.5rem); 
+            font-style: italic; font-weight: bold; margin: 0;
             letter-spacing: -1px;
         }
 
-        /* 导航栏容器 */
         .nav-container { 
             max-width: 1200px; 
             margin: 0 auto;
             position: relative; 
         }
         
+        /* 导航栏：已删除 CV */
         .navigation {
             display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0;
         }
@@ -62,11 +57,11 @@
             padding: 0 30px;
         }
 
-        /* 轮播图：电脑端优化 */
+        /* 轮播图容器 */
         .slider-container {
             max-width: 600px; 
             margin: 30px auto 15px;
-            position: relative;
+            position: relative; /* 按钮将相对于此定位 */
         }
 
         .slider-wrapper {
@@ -78,34 +73,36 @@
         .image-slider { display: flex; transition: transform 0.5s ease-in-out; width: 100%; }
         .image-slider img { width: 100%; flex-shrink: 0; height: 400px; object-fit: cover; -webkit-user-drag: none; }
 
-        /* 轮播切换按钮 */
+        /* --- 修复箭头显示不全 --- */
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.9); border: none; width: 40px; height: 40px;
-            border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.2rem;
+            background: rgba(255,255,255,0.85); /* 提高不透明度 */
+            border: none; width: 40px; height: 40px;
+            border-radius: 50%; cursor: pointer; 
+            z-index: 20; /* 确保在图片之上 */
+            font-size: 1.2rem;
             display: flex; align-items: center; justify-content: center; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            transition: 0.3s;
         }
         .nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
-        .btn-prev { left: -20px; }
-        .btn-next { right: -20px; }
+        
+        /* 调整位置：确保在 slider-wrapper 内部边缘显示 */
+        .btn-prev { left: 15px; }
+        .btn-next { right: 15px; }
 
         .slider-hint { text-align: center; font-size: 0.9rem; color: #888; margin-top: 15px; font-style: italic; }
 
         /* 简介文字：两端对齐 */
         .center-text { 
-            text-align: justify; 
-            text-justify: inter-word;
-            font-size: 1.4rem; 
-            max-width: 850px; 
-            margin: 50px auto; 
+            text-align: justify; text-justify: inter-word;
+            font-size: 1.4rem; max-width: 850px; margin: 50px auto; 
         }
         .center-text p { margin-bottom: 25px; }
         .center-text a { color: inherit; text-decoration: underline; }
 
         footer { text-align: center; margin-top: 100px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
 
-        /* 响应式：针对手机端的特殊覆盖 */
         @media (max-width: 768px) {
             .header-section { padding-top: 25px; }
             #main-title { text-align: left; padding-left: 25px; font-size: 3.2rem; }
@@ -118,8 +115,7 @@
             }
             .navigation.active { display: flex; }
             .navigation li { margin: 15px 0; }
-            .navigation a { font-size: 1.4rem; }
-            .nav-btn { display: none; }
+            .nav-btn { display: none; } /* 移动端隐藏箭头，靠滑动 */
             .image-slider img { height: 280px; }
             .slider-container { max-width: 100%; }
             .center-text { text-align: left; font-size: 1.25rem; }
@@ -146,14 +142,14 @@
     <div class="main-content">
         <div class="slider-container">
             <div class="slider-wrapper" id="wrapper">
-                <button class="nav-btn btn-prev" id="prevBtn">&#10094;</button>
+                <button class="nav-btn btn-prev" id="prevBtn" aria-label="Previous">&#10094;</button>
                 <div class="image-slider" id="slider">
                     <img src="photos/roma.jpg" alt="Field trip in Rome">
                     <img src="photos/sunset.jpg" alt="University of Konstanz Sunset">
                     <img src="photos/edinburgh.jpg" alt="Edinburgh Visit">
                     <img src="photos/snow.jpg" alt="Snow Mountain View">
                 </div>
-                <button class="nav-btn btn-next" id="nextBtn">&#10095;</button>
+                <button class="nav-btn btn-next" id="nextBtn" aria-label="Next">&#10095;</button>
             </div>
             <div class="slider-hint">Swipe or drag to explore photos</div>
         </div>
@@ -176,15 +172,12 @@
     <footer>&copy; <span id="year"></span> Xiong Shi</footer>
 
     <script>
-        // 1. 自动年份
         document.getElementById("year").textContent = new Date().getFullYear();
 
-        // 2. 汉堡菜单切换
         function toggleMenu() { 
             document.getElementById("navMenu").classList.toggle("active"); 
         }
 
-        // --- 3. 无限轮播逻辑 (全平台通用) ---
         const slider = document.getElementById('slider');
         const wrapper = document.getElementById('wrapper');
         const nextBtn = document.getElementById('nextBtn');
@@ -194,7 +187,6 @@
         let counter = 1;
         const size = 100;
 
-        // 克隆节点
         const firstClone = slides[0].cloneNode(true);
         const lastClone = slides[slides.length - 1].cloneNode(true);
         slider.appendChild(firstClone);
@@ -220,7 +212,6 @@
         nextBtn.addEventListener('click', moveNext);
         prevBtn.addEventListener('click', movePrev);
 
-        // 处理无限循环跳转
         slider.addEventListener('transitionend', () => {
             if (allSlides[counter].src.includes(firstClone.src.split('/').pop()) && counter === allSlides.length - 1) {
                 slider.style.transition = "none";
@@ -234,7 +225,6 @@
             }
         });
 
-        // 4. 拖拽与手势支持
         let isDragging = false, startPos = 0;
         wrapper.addEventListener('mousedown', dragStart);
         wrapper.addEventListener('touchstart', dragStart, {passive: true});
@@ -244,7 +234,12 @@
         wrapper.addEventListener('touchend', dragEnd);
         wrapper.addEventListener('mouseleave', dragEnd);
 
-        function dragStart(e) { isDragging = true; startPos = getPositionX(e); slider.style.transition = "none"; }
+        function dragStart(e) { 
+            if (e.target.tagName === 'BUTTON') return; // 防止点击按钮触发拖拽
+            isDragging = true; 
+            startPos = getPositionX(e); 
+            slider.style.transition = "none"; 
+        }
         function dragMove(e) {
             if (!isDragging) return;
             const currentPosition = getPositionX(e);
