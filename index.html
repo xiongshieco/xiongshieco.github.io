@@ -11,17 +11,17 @@
             overflow-x: hidden;
         }
 
-        /* 顶部导航全屏宽度 */
+        /* 顶部导航全屏装饰 */
         .header-section {
             width: 100%;
             border-bottom: 1px solid #eee;
             padding-top: 50px;
             margin-bottom: 40px;
-            position: relative; /* 为手机端按钮提供定位参考 */
+            position: relative;
         }
 
         #main-title { 
-            text-align: center; font-size: clamp(3rem, 8vw, 5.5rem); 
+            text-align: center; font-size: clamp(2.5rem, 8vw, 5.5rem); 
             font-style: italic; font-weight: bold; margin: 0;
             letter-spacing: -1px;
         }
@@ -32,72 +32,66 @@
             position: relative; 
         }
         
-        /* 导航栏 */
+        /* 电脑端导航样式 */
         .navigation {
             display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0;
         }
         .navigation li { margin: 0 25px; }
         .navigation a { 
             text-decoration: none; color: inherit; font-weight: 500; 
-            font-size: 1.3rem; transition: 0.3s;
+            font-size: 1.3rem; transition: 0.3s; white-space: nowrap;
         }
         .navigation a:hover { text-decoration: underline; opacity: 0.7; }
 
-        /* --- 手机端菜单按钮修复 --- */
+        /* 手机端汉堡菜单按钮 */
         .menu-toggle {
             display: none; 
             position: absolute; 
             right: 20px; 
-            top: 50%; /* 垂直居中 */
-            transform: translateY(-50%); /* 抵消自身高度的一半 */
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer; 
             background: none; 
             border: none; 
             padding: 5px; 
             z-index: 1000;
         }
-        .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 30px; }
+        .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 20px; width: 28px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
-        /* 主体内容布局 */
+        /* 主体内容 */
         .main-content {
             max-width: 1100px; 
             margin: 0 auto;
-            padding: 0 30px;
+            padding: 0 20px;
         }
 
-        /* 轮播图容器 */
+        /* 轮播图 */
         .slider-container {
             max-width: 600px; 
             margin: 30px auto 15px;
             position: relative;
         }
-
         .slider-wrapper {
             position: relative; cursor: grab; overflow: hidden; 
             border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .slider-wrapper:active { cursor: grabbing; }
-
         .image-slider { display: flex; transition: transform 0.5s ease-in-out; width: 100%; }
         .image-slider img { width: 100%; flex-shrink: 0; height: 400px; object-fit: cover; -webkit-user-drag: none; }
 
-        /* 切换按钮 */
+        /* 轮播按钮 */
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(255,255,255,0.85);
             border: none; width: 40px; height: 40px;
             border-radius: 50%; cursor: pointer; 
-            z-index: 20; 
-            font-size: 1.2rem;
+            z-index: 20; font-size: 1.2rem;
             display: flex; align-items: center; justify-content: center; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-            transition: 0.3s;
         }
-        .nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
         .btn-prev { left: 15px; }
         .btn-next { right: 15px; }
-
         .slider-hint { text-align: center; font-size: 0.9rem; color: #888; margin-top: 15px; font-style: italic; }
 
         /* 简介文字 */
@@ -105,40 +99,39 @@
             text-align: justify; text-justify: inter-word;
             font-size: 1.4rem; max-width: 850px; margin: 50px auto; 
         }
-        .center-text p { margin-bottom: 25px; }
         .center-text a { color: inherit; text-decoration: underline; }
 
         footer { text-align: center; margin-top: 100px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
 
-        /* 响应式适配 */
+        /* --- 核心修复：手机端适配 --- */
         @media (max-width: 768px) {
-            .header-section { padding-top: 15px; padding-bottom: 15px; margin-bottom: 30px; }
-            #main-title { text-align: left; padding-left: 20px; font-size: 2.8rem; }
+            .header-section { padding-top: 15px; padding-bottom: 15px; margin-bottom: 25px; }
+            #main-title { text-align: left; padding-left: 20px; font-size: 2.5rem; }
             
-            .menu-toggle { display: block; } /* 确保显示按钮 */
+            .menu-toggle { display: block; } 
             
             .navigation {
                 display: none; 
-                flex-direction: column; 
-                text-align: right;    
-                padding: 20px 30px; 
-                background: #fdfdfd; 
+                flex-direction: column; /* 垂直排列，防止溢出 */
+                text-align: left;    
+                padding: 15px 25px; 
+                background: #fff; 
                 width: 100%; 
                 position: absolute; 
-                top: 100%; /* 紧贴 header-section 底部 */
+                top: 100%; 
                 left: 0; 
                 z-index: 500;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+                box-shadow: 0 8px 15px rgba(0,0,0,0.08);
                 border-top: 1px solid #eee;
             }
             .navigation.active { display: flex; }
-            .navigation li { margin: 10px 0; }
-            .navigation a { font-size: 1.3rem; }
+            .navigation li { margin: 12px 0; }
+            .navigation a { font-size: 1.2rem; display: block; width: 100%; }
             
             .nav-btn { display: none; } 
-            .image-slider img { height: 280px; }
+            .image-slider img { height: 260px; }
             .slider-container { max-width: 100%; margin-top: 10px; }
-            .center-text { text-align: left; font-size: 1.2rem; margin: 30px auto; }
+            .center-text { text-align: left; font-size: 1.2rem; margin: 30px auto; padding: 0 5px; }
         }
     </style>
 </head>
@@ -199,7 +192,8 @@
         document.getElementById("year").textContent = new Date().getFullYear();
 
         function toggleMenu() { 
-            document.getElementById("navMenu").classList.toggle("active"); 
+            const menu = document.getElementById("navMenu");
+            menu.classList.toggle("active"); 
         }
 
         const slider = document.getElementById('slider');
