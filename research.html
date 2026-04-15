@@ -3,92 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research - Xiong Shi</title>
+    <title>Xiong Shi - Research</title>
     <style>
-        body { font-family: 'Aptos', sans-serif; line-height: 1.8; padding: 20px; max-width: 950px; margin: auto; color: black; }
-        #main-title { text-align: center; font-size: clamp(3rem, 12vw, 6rem); font-style: italic; font-weight: bold; margin-bottom: 20px; }
-        .nav-container { position: relative; width: 100%; }
-        
-        .navigation { display: flex; justify-content: center; list-style: none; padding: 0; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .navigation li { margin: 0 25px; }
-        .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.5rem; }
-        .navigation a:hover { text-decoration: underline; }
+        /* 基础设置 */
+        body { 
+            font-family: 'Aptos', 'Segoe UI', sans-serif; 
+            line-height: 1.7; margin: 0; padding: 0; color: black; 
+            overflow-x: hidden;
+        }
 
-        .menu-toggle { display: none; position: absolute; right: 10px; top: 20px; cursor: pointer; background: none; border: none; z-index: 100; }
+        /* 顶部全屏装饰层 */
+        .header-section {
+            width: 100%;
+            border-bottom: 1px solid #eee;
+            padding-top: 50px;
+            margin-bottom: 40px;
+        }
+
+        #main-title { 
+            text-align: center; font-size: clamp(3rem, 8vw, 5.5rem); 
+            font-style: italic; font-weight: bold; margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .nav-container { 
+            max-width: 1200px; 
+            margin: 0 auto;
+            position: relative; 
+        }
+        
+        /* 导航栏：已去掉 CV 列 */
+        .navigation {
+            display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0;
+        }
+        .navigation li { margin: 0 25px; }
+        .navigation a { 
+            text-decoration: none; color: inherit; font-weight: 500; 
+            font-size: 1.3rem; transition: 0.3s;
+        }
+        .navigation a:hover { text-decoration: underline; opacity: 0.7; }
+
+        .menu-toggle {
+            display: none; position: absolute; right: 20px; top: -55px; 
+            cursor: pointer; background: none; border: none; z-index: 100;
+        }
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
-        
-        /* --- 轮播图样式（复用Home页） --- */
-        .slider-container { max-width: 500px; margin: 30px auto 10px; position: relative; }
-        .slider-wrapper { position: relative; cursor: grab; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+
+        /* 主体内容区 */
+        .main-content {
+            max-width: 1100px; 
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* 轮播图：宽屏优化 */
+        .slider-container {
+            max-width: 600px; 
+            margin: 30px auto 15px;
+            position: relative;
+        }
+
+        .slider-wrapper {
+            position: relative; cursor: grab; overflow: hidden; 
+            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
         .slider-wrapper:active { cursor: grabbing; }
+
         .image-slider { display: flex; transition: transform 0.5s ease-in-out; width: 100%; }
-        .image-slider img { width: 100%; flex-shrink: 0; height: 350px; object-fit: cover; user-select: none; -webkit-user-drag: none; }
-        
+        .image-slider img { width: 100%; flex-shrink: 0; height: 400px; object-fit: cover; -webkit-user-drag: none; }
+
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.8); border: none; width: 32px; height: 32px;
-            border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1rem;
-            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.9); border: none; width: 40px; height: 40px;
+            border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .btn-prev { left: 10px; }
-        .btn-next { right: 10px; }
-        .slider-hint { text-align: center; font-size: 0.85rem; color: #777; margin-top: 12px; font-style: italic; }
+        .btn-prev { left: -20px; }
+        .btn-next { right: -20px; }
 
-        .content-padding { text-align: justify; font-size: 1.3rem; max-width: 800px; margin: 40px auto; margin-top: 20px; }
-        footer { text-align: center; margin-top: 80px; font-size: 0.8em; color: #666; padding-bottom: 20px; }
+        .slider-hint { text-align: center; font-size: 0.9rem; color: #888; margin-top: 15px; font-style: italic; }
 
+        /* 正文文字：两端对齐 */
+        .content-padding { 
+            text-align: justify; 
+            text-justify: inter-word;
+            font-size: 1.35rem; 
+            max-width: 850px; 
+            margin: 50px auto; 
+        }
+
+        footer { text-align: center; margin-top: 100px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
+
+        /* 手机端适配 */
         @media (max-width: 768px) {
-            #main-title { text-align: left; padding-right: 60px; font-size: 3rem; }
+            .header-section { padding-top: 25px; }
+            #main-title { text-align: left; padding-left: 25px; font-size: 3.2rem; }
             .menu-toggle { display: block; }
-            .navigation { display: none; flex-direction: column; text-align: right; padding-right: 25px; position: absolute; top: 80px; width: 100%; background: #fdfdfd; z-index: 50; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+            .navigation {
+                display: none; flex-direction: column; text-align: right;    
+                padding-right: 30px; background: #fdfdfd; 
+                width: 100%; position: absolute; top: 25px; left: 0; z-index: 50;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
             .navigation.active { display: flex; }
             .navigation li { margin: 15px 0; }
             .nav-btn { display: none; }
             .image-slider img { height: 280px; }
+            .slider-container { max-width: 100%; }
+            .content-padding { text-align: left; font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="nav-container">
-        <h1 id="main-title">Xiong Shi</h1>
-        <button class="menu-toggle" onclick="toggleMenu()"><div class="hamburger-lines"><span class="line"></span><span class="line"></span><span class="line"></span></div></button>
-        <ul class="navigation" id="navMenu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="publication.html">Publication</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </div>
 
-    <div class="slider-container">
-        <div class="slider-wrapper" id="wrapper">
-            <button class="nav-btn btn-prev" id="prevBtn">&#10094;</button>
-            <div class="image-slider" id="slider">
-                <img src="photos/alan.jpg" alt="Light Pollution">
-                <img src="photos/multiple_GCF.jpg" alt="Multiple GCF experiment">
-                <img src="photos/plants.jpg" alt="Plant">
-            </div>
-            <button class="nav-btn btn-next" id="nextBtn">&#10095;</button>
+    <div class="header-section">
+        <div class="nav-container">
+            <h1 id="main-title">Xiong Shi</h1>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <div class="hamburger-lines"><span class="line"></span><span class="line"></span><span class="line"></span></div>
+            </button>
+            <ul class="navigation" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publication.html">Publication</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
-        <div class="slider-hint">Slide to see my research activities</div>
     </div>
 
-    <div class="content-padding">
-        I am a global change ecologist interested in understanding how multiple global change drivers, both individually and interactively, influence plant populations and communities, particularly in the context of coexistence between alien and native species. 
-        To address this, I employed a multifaceted approach, including meta-analysis, field studies, and greenhouse experiments. Building on this, I am currently extending my research into two key components: (1) how multiple global change factors influence biodiversity–ecosystem functioning (BEF) relationships, and (2) how non-native plant species shift their life-history or functional traits in introduced ranges (compared to their native ranges)?
+    <div class="main-content">
+        <div class="slider-container">
+            <div class="slider-wrapper" id="wrapper">
+                <button class="nav-btn btn-prev" id="prevBtn">&#10094;</button>
+                <div class="image-slider" id="slider">
+                    <img src="photos/field.jpg" alt="Field Study">
+                    <img src="photos/greenhouse.jpg" alt="Greenhouse Experiment">
+                    <img src="photos/analysis.jpg" alt="Data Analysis">
+                </div>
+                <button class="nav-btn btn-next" id="nextBtn">&#10095;</button>
+            </div>
+            <div class="slider-hint">Slide to see my research activities</div>
+        </div>
+
+        <div class="content-padding">
+            I am a global change ecologist interested in understanding how multiple global change drivers, both individually and interactively, influence plant populations and communities, particularly in the context of coexistence between alien and native species. 
+            To address this, I employ a multifaceted approach, including meta-analysis, field studies, and greenhouse experiments. Building on this, I am currently extending my research into two key components: (1) how multiple global change factors influence biodiversity–ecosystem functioning (BEF) relationships, and (2) how non-native plant species shift their life-history or functional traits in introduced ranges (compared to their native ranges)?
+        </div>
     </div>
 
     <footer>&copy; <span id="year"></span> Xiong Shi</footer>
 
     <script>
-        // 1. 年份更新
+        // 1. 自动年份
         document.getElementById("year").textContent = new Date().getFullYear();
 
         // 2. 菜单切换
         function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
 
-        // 3. 无限轮播逻辑 (复用逻辑)
+        // 3. 无限轮播逻辑
         const slider = document.getElementById('slider');
         const wrapper = document.getElementById('wrapper');
         const nextBtn = document.getElementById('nextBtn');
@@ -139,9 +212,9 @@
         // 4. 拖拽支持
         let isDragging = false, startPos = 0;
         wrapper.addEventListener('mousedown', dragStart);
-        wrapper.addEventListener('touchstart', dragStart);
+        wrapper.addEventListener('touchstart', dragStart, {passive: true});
         wrapper.addEventListener('mousemove', dragMove);
-        wrapper.addEventListener('touchmove', dragMove);
+        wrapper.addEventListener('touchmove', dragMove, {passive: true});
         wrapper.addEventListener('mouseup', dragEnd);
         wrapper.addEventListener('touchend', dragEnd);
         wrapper.addEventListener('mouseleave', dragEnd);
