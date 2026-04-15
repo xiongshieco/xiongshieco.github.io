@@ -75,11 +75,12 @@
             max-width: 600px;
             width: 100%;
             margin-top: 20px;
+            text-align: center; /* 内容居中 */
         }
 
         .contact-item {
-            margin-bottom: 30px;
-            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-size: 1.5rem;
         }
 
         .contact-label {
@@ -88,14 +89,14 @@
             text-transform: uppercase;
             font-size: 0.9rem;
             color: #666;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
         }
 
         .contact-value a {
             color: black;
             text-decoration: none;
-            border-bottom: 1px solid transparent;
+            border-bottom: 1px solid #ccc;
             transition: 0.3s;
         }
 
@@ -103,11 +104,12 @@
             border-bottom: 1px solid black;
         }
 
-        /* 社交链接/学术主页样式 */
+        /* 学术链接样式 */
         .social-links {
-            margin-top: 20px;
+            margin-top: 10px;
             display: flex;
             gap: 20px;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
@@ -115,15 +117,16 @@
             font-size: 1.1rem;
             color: #444;
             text-decoration: none;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border: 1px solid #eee;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: 0.3s;
         }
 
         .social-links a:hover {
             background: #f9f9f9;
             border-color: #ccc;
+            transform: translateY(-2px);
         }
 
         footer { text-align: center; margin-top: 100px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
@@ -154,9 +157,8 @@
             .navigation a { font-size: 1.2rem; display: block; width: 100%; }
             
             .contact-card { padding: 20px; }
-            .contact-item { font-size: 1.1rem; }
-            .social-links { gap: 10px; }
-            .social-links a { font-size: 0.95rem; padding: 5px 10px; }
+            .contact-item { font-size: 1.2rem; }
+            .social-links a { font-size: 1rem; width: 100%; } /* 手机端链接占满一行 */
         }
     </style>
 </head>
@@ -187,23 +189,15 @@
             <div class="contact-item">
                 <span class="contact-label">Email</span>
                 <div class="contact-value">
-                    <a href="mailto:shixiong_eco@163.com">shixiong_eco@163.com</a>
+                    <a href="mailto:shixiongsnu@gmail.com">shixiongsnu@gmail.com</a>
                 </div>
             </div>
 
             <div class="contact-item">
-                <span class="contact-label">Current Address</span>
-                <div class="contact-value">
-                    University of Konstanz, Germany
-                </div>
-            </div>
-
-            <div class="contact-item">
-                <span class="contact-label">Academic Profiles</span>
+                <span class="contact-label">Profiles</span>
                 <div class="social-links">
                     <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank">Google Scholar</a>
                     <a href="https://www.researchgate.net/profile/Xiong-Shi" target="_blank">ResearchGate</a>
-                    <a href="https://orcid.org/YOUR_ORCID" target="_blank">ORCID</a>
                 </div>
             </div>
 
