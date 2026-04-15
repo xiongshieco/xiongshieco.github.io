@@ -17,6 +17,7 @@
             border-bottom: 1px solid #eee;
             padding-top: 50px;
             margin-bottom: 40px;
+            position: relative; /* 为手机端按钮提供定位参考 */
         }
 
         #main-title { 
@@ -31,7 +32,7 @@
             position: relative; 
         }
         
-        /* 导航栏：已删除 CV */
+        /* 导航栏 */
         .navigation {
             display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0;
         }
@@ -42,12 +43,20 @@
         }
         .navigation a:hover { text-decoration: underline; opacity: 0.7; }
 
-        /* 手机端菜单按钮 */
+        /* --- 手机端菜单按钮修复 --- */
         .menu-toggle {
-            display: none; position: absolute; right: 20px; top: -55px; 
-            cursor: pointer; background: none; border: none; z-index: 100;
+            display: none; 
+            position: absolute; 
+            right: 20px; 
+            top: 50%; /* 垂直居中 */
+            transform: translateY(-50%); /* 抵消自身高度的一半 */
+            cursor: pointer; 
+            background: none; 
+            border: none; 
+            padding: 5px; 
+            z-index: 1000;
         }
-        .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 32px; }
+        .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 22px; width: 30px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
         /* 主体内容布局 */
@@ -61,7 +70,7 @@
         .slider-container {
             max-width: 600px; 
             margin: 30px auto 15px;
-            position: relative; /* 按钮将相对于此定位 */
+            position: relative;
         }
 
         .slider-wrapper {
@@ -73,27 +82,25 @@
         .image-slider { display: flex; transition: transform 0.5s ease-in-out; width: 100%; }
         .image-slider img { width: 100%; flex-shrink: 0; height: 400px; object-fit: cover; -webkit-user-drag: none; }
 
-        /* --- 修复箭头显示不全 --- */
+        /* 切换按钮 */
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.85); /* 提高不透明度 */
+            background: rgba(255,255,255,0.85);
             border: none; width: 40px; height: 40px;
             border-radius: 50%; cursor: pointer; 
-            z-index: 20; /* 确保在图片之上 */
+            z-index: 20; 
             font-size: 1.2rem;
             display: flex; align-items: center; justify-content: center; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
             transition: 0.3s;
         }
         .nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
-        
-        /* 调整位置：确保在 slider-wrapper 内部边缘显示 */
         .btn-prev { left: 15px; }
         .btn-next { right: 15px; }
 
         .slider-hint { text-align: center; font-size: 0.9rem; color: #888; margin-top: 15px; font-style: italic; }
 
-        /* 简介文字：两端对齐 */
+        /* 简介文字 */
         .center-text { 
             text-align: justify; text-justify: inter-word;
             font-size: 1.4rem; max-width: 850px; margin: 50px auto; 
@@ -103,22 +110,35 @@
 
         footer { text-align: center; margin-top: 100px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
 
+        /* 响应式适配 */
         @media (max-width: 768px) {
-            .header-section { padding-top: 25px; }
-            #main-title { text-align: left; padding-left: 25px; font-size: 3.2rem; }
-            .menu-toggle { display: block; }
+            .header-section { padding-top: 15px; padding-bottom: 15px; margin-bottom: 30px; }
+            #main-title { text-align: left; padding-left: 20px; font-size: 2.8rem; }
+            
+            .menu-toggle { display: block; } /* 确保显示按钮 */
+            
             .navigation {
-                display: none; flex-direction: column; text-align: right;    
-                padding-right: 30px; background: #fdfdfd; 
-                width: 100%; position: absolute; top: 25px; left: 0; z-index: 50;
+                display: none; 
+                flex-direction: column; 
+                text-align: right;    
+                padding: 20px 30px; 
+                background: #fdfdfd; 
+                width: 100%; 
+                position: absolute; 
+                top: 100%; /* 紧贴 header-section 底部 */
+                left: 0; 
+                z-index: 500;
                 box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+                border-top: 1px solid #eee;
             }
             .navigation.active { display: flex; }
-            .navigation li { margin: 15px 0; }
-            .nav-btn { display: none; } /* 移动端隐藏箭头，靠滑动 */
+            .navigation li { margin: 10px 0; }
+            .navigation a { font-size: 1.3rem; }
+            
+            .nav-btn { display: none; } 
             .image-slider img { height: 280px; }
-            .slider-container { max-width: 100%; }
-            .center-text { text-align: left; font-size: 1.25rem; }
+            .slider-container { max-width: 100%; margin-top: 10px; }
+            .center-text { text-align: left; font-size: 1.2rem; margin: 30px auto; }
         }
     </style>
 </head>
@@ -127,8 +147,12 @@
     <div class="header-section">
         <div class="nav-container">
             <h1 id="main-title">Xiong Shi</h1>
-            <button class="menu-toggle" onclick="toggleMenu()">
-                <div class="hamburger-lines"><span class="line"></span><span class="line"></span><span class="line"></span></div>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
+                <div class="hamburger-lines">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
             </button>
             <ul class="navigation" id="navMenu">
                 <li><a href="index.html">Home</a></li>
@@ -235,7 +259,7 @@
         wrapper.addEventListener('mouseleave', dragEnd);
 
         function dragStart(e) { 
-            if (e.target.tagName === 'BUTTON') return; // 防止点击按钮触发拖拽
+            if (e.target.tagName === 'BUTTON') return;
             isDragging = true; 
             startPos = getPositionX(e); 
             slider.style.transition = "none"; 
