@@ -7,17 +7,14 @@
     <style>
         body { 
             font-family: 'Aptos', 'Segoe UI', 'Ubuntu', sans-serif; 
-            line-height: 1.7; margin: 0; padding: 0; color: black; 
+            line-height: 1.8; margin: 0; padding: 0; color: black; 
             overflow-x: hidden;
         }
 
         /* 顶部导航全屏装饰层 */
         .header-section {
-            width: 100%;
-            border-bottom: 1px solid #eee;
-            padding-top: 50px;
-            margin-bottom: 40px;
-            position: relative;
+            width: 100%; border-bottom: 1px solid #eee;
+            padding-top: 50px; margin-bottom: 40px; position: relative;
         }
 
         #main-title { 
@@ -26,121 +23,125 @@
             letter-spacing: -1px;
         }
 
-        .nav-container { 
-            max-width: 1200px; 
-            margin: 0 auto;
-            position: relative; 
-        }
+        .nav-container { max-width: 1200px; margin: 0 auto; position: relative; }
         
-        .navigation {
-            display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0;
-        }
+        .navigation { display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0; }
         .navigation li { margin: 0 25px; }
-        .navigation a { 
-            text-decoration: none; color: inherit; font-weight: 500; 
-            font-size: 1.3rem; transition: 0.3s; white-space: nowrap;
-        }
+        .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.3rem; transition: 0.3s; white-space: nowrap; }
         .navigation a:hover { text-decoration: underline; opacity: 0.7; }
 
-        /* 手机端菜单按钮 */
         .menu-toggle {
-            display: none; 
-            position: absolute; 
-            right: 20px; 
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer; 
-            background: none; 
-            border: none; 
-            padding: 5px; 
-            z-index: 1000;
+            display: none; position: absolute; right: 20px; top: 50%;
+            transform: translateY(-50%); cursor: pointer; background: none; 
+            border: none; padding: 5px; z-index: 1000;
         }
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 20px; width: 28px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
-        /* 主体内容布局 */
-        .main-content {
+        /* 主体内容布局：左右分栏 */
+        .main-content { 
             max-width: 1100px; 
-            margin: 0 auto;
+            margin: 0 auto; 
             padding: 0 20px;
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+            margin-top: 50px;
         }
 
-        /* 轮播图容器 */
+        /* 左侧文字区块 */
+        .research-text-box {
+            flex: 1.2;
+        }
+        .research-text-box h2 {
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-left: 6px solid #000;
+            padding-left: 15px;
+        }
+        .research-text-box p {
+            font-size: 1.3rem;
+            text-align: justify;
+            text-justify: inter-word;
+            color: #1a1a1a;
+        }
+
+        /* 右侧轮播图区块 */
+        .slider-column {
+            flex: 1;
+            max-width: 500px;
+            position: sticky; /* 电脑端滚动时文字时，图片可以停留在视野内 */
+            top: 50px;
+        }
+
         .slider-container {
-            max-width: 600px; 
-            margin: 30px auto 15px;
             position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: #f9f9f9;
         }
 
-        .slider-wrapper {
-            position: relative; cursor: grab; overflow: hidden; 
-            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .image-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
         }
-        .slider-wrapper:active { cursor: grabbing; }
 
-        .image-slider { display: flex; transition: transform 0.5s ease-in-out; width: 100%; }
-        .image-slider img { width: 100%; flex-shrink: 0; height: 400px; object-fit: cover; -webkit-user-drag: none; }
+        .image-slider img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            flex-shrink: 0;
+            -webkit-user-drag: none;
+        }
 
-        /* 内部切换按钮 */
+        /* 按钮样式 */
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.85);
-            border: none; width: 40px; height: 40px;
-            border-radius: 50%; cursor: pointer; 
-            z-index: 20; 
-            font-size: 1.2rem;
-            display: flex; align-items: center; justify-content: center; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-            transition: 0.3s;
+            background: rgba(255,255,255,0.85); border: none; width: 40px; height: 40px;
+            border-radius: 50%; cursor: pointer; z-index: 10; font-size: 1.1rem;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s;
         }
         .nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
         .btn-prev { left: 15px; }
         .btn-next { right: 15px; }
 
-        .slider-hint { text-align: center; font-size: 0.9rem; color: #888; margin-top: 15px; font-style: italic; }
-
-        /* 研究描述文字：两端对齐 */
-        .content-padding { 
-            text-align: justify; 
-            text-justify: inter-word;
-            font-size: 1.35rem; 
-            max-width: 850px; 
-            margin: 50px auto; 
+        .slider-hint {
+            text-align: center; font-size: 0.9rem; color: #888; 
+            margin-top: 15px; font-style: italic;
         }
 
-        /* 页脚与计数器 */
-        footer { text-align: center; margin-top: 100px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
+        footer { text-align: center; margin-top: 120px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
         #busuanzi_container_site_pv { margin-left: 10px; }
 
-        /* 响应式适配 */
+        /* 手机端适配：改为上下排列 */
         @media (max-width: 768px) {
-            .header-section { padding-top: 15px; padding-bottom: 15px; margin-bottom: 25px; }
+            .header-section { padding-top: 15px; padding-bottom: 15px; }
             #main-title { text-align: left; padding-left: 20px; font-size: 2.5rem; }
-            
             .menu-toggle { display: block; } 
             
             .navigation {
-                display: none; 
-                flex-direction: column; 
-                text-align: left;    
-                padding: 15px 25px; 
-                background: #fff; 
-                width: 100%; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                z-index: 500;
-                box-shadow: 0 8px 15px rgba(0,0,0,0.08);
-                border-top: 1px solid #eee;
+                display: none; flex-direction: column; text-align: left; padding: 15px 25px; 
+                background: #fff; width: 100%; position: absolute; top: 100%; left: 0; 
+                z-index: 500; box-shadow: 0 8px 15px rgba(0,0,0,0.08);
             }
             .navigation.active { display: flex; }
-            .navigation li { margin: 12px 0; }
-            .navigation a { font-size: 1.2rem; display: block; width: 100%; }
-            
-            .nav-btn { display: none; } 
-            .image-slider img { height: 260px; }
-            .slider-container { max-width: 100%; margin-top: 10px; }
-            .content-padding { text-align: left; font-size: 1.2rem; margin: 30px auto; padding: 0 5px; }
+
+            .main-content {
+                flex-direction: column;
+                gap: 30px;
+                margin-top: 20px;
+            }
+            .slider-column {
+                max-width: 100%;
+                width: 100%;
+                position: static;
+            }
+            .image-slider img { height: 300px; }
+            .research-text-box h2 { font-size: 1.6rem; }
+            .research-text-box p { font-size: 1.15rem; }
         }
     </style>
 </head>
@@ -149,12 +150,8 @@
     <div class="header-section">
         <div class="nav-container">
             <h1 id="main-title">Xiong Shi</h1>
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
-                <div class="hamburger-lines">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </div>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <div class="hamburger-lines"><span class="line"></span><span class="line"></span><span class="line"></span></div>
             </button>
             <ul class="navigation" id="navMenu">
                 <li><a href="index.html">Home</a></li>
@@ -166,22 +163,27 @@
     </div>
 
     <div class="main-content">
-        <div class="slider-container">
-            <div class="slider-wrapper" id="wrapper">
-                <button class="nav-btn btn-prev" id="prevBtn" aria-label="Previous">&#10094;</button>
-                <div class="image-slider" id="slider">
-                    <img src="photos/alan.jpg" alt="ALAN Research">
-                    <img src="photos/multiple_GCF.jpg" alt="GCF Experiment">
-                    <img src="photos/plants.jpg" alt="Research Plants">
-                </div>
-                <button class="nav-btn btn-next" id="nextBtn" aria-label="Next">&#10095;</button>
-            </div>
-            <div class="slider-hint">Slide or drag to explore research photos</div>
+        <div class="research-text-box">
+            <h2>Research Interests</h2>
+            <p>
+                I am a global change ecologist interested in understanding how multiple global change drivers, both individually and interactively, influence plant populations and communities, particularly in the context of coexistence between alien and native species. 
+            </p>
+            <p>
+                To address this, I employ a multifaceted approach, including meta-analysis, field studies, and greenhouse experiments. Building on this, I am currently extending my research into two key components: (1) how multiple global change factors influence biodiversity–ecosystem functioning (BEF) relationships, and (2) how non-native plant species shift their life-history or functional traits in introduced ranges (compared to their native ranges)?
+            </p>
         </div>
 
-        <div class="content-padding">
-            I am a global change ecologist interested in understanding how multiple global change drivers, both individually and interactively, influence plant populations and communities, particularly in the context of coexistence between alien and native species. 
-            To address this, I employ a multifaceted approach, including meta-analysis, field studies, and greenhouse experiments. Building on this, I am currently extending my research into two key components: (1) how multiple global change factors influence biodiversity–ecosystem functioning (BEF) relationships, and (2) how non-native plant species shift their life-history or functional traits in introduced ranges (compared to their native ranges)?
+        <div class="slider-column">
+            <div class="slider-container" id="wrapper">
+                <button class="nav-btn btn-prev" id="prevBtn">&#10094;</button>
+                <div class="image-slider" id="slider">
+                    <img src="photos/multiple_GCF.jpg" alt="GCF Research">
+                    <img src="photos/alan.jpg" alt="ALAN Study">
+                    <img src="photos/plants.jpg" alt="Plant Research">
+                </div>
+                <button class="nav-btn btn-next" id="nextBtn">&#10095;</button>
+            </div>
+            <div class="slider-hint">Drag or click to explore research photos</div>
         </div>
     </div>
 
@@ -195,96 +197,75 @@
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     <script>
-        // 1. 自动年份
         document.getElementById("year").textContent = new Date().getFullYear();
-
-        // 2. 菜单切换
         function toggleMenu() { 
-            const menu = document.getElementById("navMenu");
-            menu.classList.toggle("active"); 
+            document.getElementById("navMenu").classList.toggle("active"); 
         }
 
-        // --- 3. 无限轮播逻辑 ---
+        // --- 轮播逻辑 (无限循环) ---
         const slider = document.getElementById('slider');
         const wrapper = document.getElementById('wrapper');
         const nextBtn = document.getElementById('nextBtn');
         const prevBtn = document.getElementById('prevBtn');
         let slides = document.querySelectorAll('.image-slider img');
 
-        // 仅在有多张图片时运行轮播
-        if (slides.length > 0) {
-            let counter = 1;
-            const size = 100;
+        let counter = 1;
+        const size = 100;
 
-            const firstClone = slides[0].cloneNode(true);
-            const lastClone = slides[slides.length - 1].cloneNode(true);
-            slider.appendChild(firstClone);
-            slider.insertBefore(lastClone, slides[0]);
+        const firstClone = slides[0].cloneNode(true);
+        const lastClone = slides[slides.length - 1].cloneNode(true);
+        slider.appendChild(firstClone);
+        slider.insertBefore(lastClone, slides[0]);
 
-            const allSlides = document.querySelectorAll('.image-slider img');
+        const allSlides = document.querySelectorAll('.image-slider img');
+        slider.style.transform = `translateX(${-size * counter}%)`;
+
+        function moveNext() {
+            if (counter >= allSlides.length - 1) return;
+            slider.style.transition = "transform 0.5s ease-in-out";
+            counter++;
             slider.style.transform = `translateX(${-size * counter}%)`;
-
-            function moveNext() {
-                if (counter >= allSlides.length - 1) return;
-                slider.style.transition = "transform 0.5s ease-in-out";
-                counter++;
-                slider.style.transform = `translateX(${-size * counter}%)`;
-            }
-
-            function movePrev() {
-                if (counter <= 0) return;
-                slider.style.transition = "transform 0.5s ease-in-out";
-                counter--;
-                slider.style.transform = `translateX(${-size * counter}%)`;
-            }
-
-            nextBtn.addEventListener('click', moveNext);
-            prevBtn.addEventListener('click', movePrev);
-
-            slider.addEventListener('transitionend', () => {
-                if (allSlides[counter].src.includes(firstClone.src.split('/').pop()) && counter === allSlides.length - 1) {
-                    slider.style.transition = "none";
-                    counter = 1;
-                    slider.style.transform = `translateX(${-size * counter}%)`;
-                }
-                if (allSlides[counter].src.includes(lastClone.src.split('/').pop()) && counter === 0) {
-                    slider.style.transition = "none";
-                    counter = allSlides.length - 2;
-                    slider.style.transform = `translateX(${-size * counter}%)`;
-                }
-            });
-
-            // 4. 手势支持
-            let isDragging = false, startPos = 0;
-            wrapper.addEventListener('mousedown', dragStart);
-            wrapper.addEventListener('touchstart', dragStart, {passive: true});
-            wrapper.addEventListener('mousemove', dragMove);
-            wrapper.addEventListener('touchmove', dragMove, {passive: true});
-            wrapper.addEventListener('mouseup', dragEnd);
-            wrapper.addEventListener('touchend', dragEnd);
-            wrapper.addEventListener('mouseleave', dragEnd);
-
-            function dragStart(e) { 
-                if (e.target.tagName === 'BUTTON') return;
-                isDragging = true; startPos = getPositionX(e); slider.style.transition = "none"; 
-            }
-            function dragMove(e) {
-                if (!isDragging) return;
-                const currentPosition = getPositionX(e);
-                const diff = (currentPosition - startPos) / wrapper.offsetWidth * 100;
-                slider.style.transform = `translateX(${-size * counter + diff}%)`;
-            }
-            function dragEnd() {
-                if (!isDragging) return;
-                isDragging = false;
-                const movedBy = (parseFloat(slider.style.transform.replace('translateX(', '')) + (counter * size));
-                slider.style.transition = "transform 0.5s ease-in-out";
-                if (movedBy < -15) moveNext();
-                else if (movedBy > 15) movePrev();
-                else slider.style.transform = `translateX(${-size * counter}%)`;
-            }
-            function getPositionX(e) { return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX; }
         }
+
+        function movePrev() {
+            if (counter <= 0) return;
+            slider.style.transition = "transform 0.5s ease-in-out";
+            counter--;
+            slider.style.transform = `translateX(${-size * counter}%)`;
+        }
+
+        nextBtn.addEventListener('click', moveNext);
+        prevBtn.addEventListener('click', movePrev);
+
+        slider.addEventListener('transitionend', () => {
+            if (allSlides[counter].src.includes(firstClone.src.split('/').pop()) && counter === allSlides.length - 1) {
+                slider.style.transition = "none";
+                counter = 1;
+                slider.style.transform = `translateX(${-size * counter}%)`;
+            }
+            if (allSlides[counter].src.includes(lastClone.src.split('/').pop()) && counter === 0) {
+                slider.style.transition = "none";
+                counter = allSlides.length - 2;
+                slider.style.transform = `translateX(${-size * counter}%)`;
+            }
+        });
+
+        // 拖拽支持
+        let isDragging = false, startPos = 0;
+        wrapper.addEventListener('mousedown', (e) => { 
+            if(e.target.tagName !== 'BUTTON') { isDragging = true; startPos = e.pageX; slider.style.transition = "none"; }
+        });
+        wrapper.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const diff = (e.pageX - startPos) / wrapper.offsetWidth * 100;
+            slider.style.transform = `translateX(${-size * counter + diff}%)`;
+        });
+        window.addEventListener('mouseup', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            slider.style.transition = "transform 0.5s ease-in-out";
+            slider.style.transform = `translateX(${-size * counter}%)`; // 简单复位，可根据需要增加切图逻辑
+        });
     </script>
 </body>
 </html>
