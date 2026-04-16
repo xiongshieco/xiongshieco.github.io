@@ -5,84 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xiong Shi - Contact</title>
     <style>
-        body { 
-            font-family: 'Aptos', 'Segoe UI', 'Ubuntu', sans-serif; 
-            line-height: 1.7; margin: 0; padding: 0; color: black; 
-            overflow-x: hidden;
-        }
-
-        .header-section {
-            width: 100%;
-            border-bottom: 1px solid #eee;
-            padding-top: 50px;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        #main-title { 
-            text-align: center; font-size: clamp(2.5rem, 8vw, 5.5rem); 
-            font-style: italic; font-weight: bold; margin: 0;
-            letter-spacing: -1px;
-        }
-
-        .nav-container { 
-            max-width: 1200px; 
-            margin: 0 auto;
-            position: relative; 
-        }
-        
-        .navigation {
-            display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0;
-        }
+        body { font-family: 'Aptos', 'Segoe UI', sans-serif; line-height: 1.7; margin: 0; padding: 0; color: black; overflow-x: hidden; }
+        .header-section { width: 100%; border-bottom: 1px solid #eee; padding-top: 50px; margin-bottom: 40px; position: relative; }
+        #main-title { text-align: center; font-size: clamp(2.5rem, 8vw, 5.5rem); font-style: italic; font-weight: bold; margin: 0; letter-spacing: -1px; }
+        .nav-container { max-width: 1200px; margin: 0 auto; position: relative; }
+        .navigation { display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0; }
         .navigation li { margin: 0 25px; }
-        .navigation a { 
-            text-decoration: none; color: inherit; font-weight: 500; 
-            font-size: 1.3rem; transition: 0.3s; white-space: nowrap;
-        }
+        .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.3rem; transition: 0.3s; }
         .navigation a:hover { text-decoration: underline; opacity: 0.7; }
-
-        .menu-toggle {
-            display: none; position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-            cursor: pointer; background: none; border: none; padding: 5px; z-index: 1000;
-        }
+        .menu-toggle { display: none; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; background: none; border: none; z-index: 1000; }
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 20px; width: 28px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
-        .main-content {
-            max-width: 1100px; margin: 0 auto; padding: 0 20px;
-            display: flex; flex-direction: column; align-items: center;
-        }
-
-        .contact-card {
-            background: #fff; padding: 60px 40px; max-width: 600px; width: 100%;
-            margin-top: 20px; text-align: center;
-        }
-
+        .main-content { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; flex-direction: column; align-items: center; }
+        .contact-card { background: #fff; padding: 60px 40px; max-width: 600px; width: 100%; margin-top: 20px; text-align: center; }
         .contact-item { font-size: 1.6rem; }
-        .contact-label {
-            font-weight: bold; display: block; text-transform: uppercase;
-            font-size: 0.9rem; color: #666; letter-spacing: 2px; margin-bottom: 15px;
-        }
-
-        .contact-value a {
-            color: black; text-decoration: none; border-bottom: 1px solid #ccc; transition: 0.3s;
-        }
+        .contact-label { font-weight: bold; display: block; text-transform: uppercase; font-size: 0.9rem; color: #666; letter-spacing: 2px; margin-bottom: 15px; }
+        .contact-value a { color: black; text-decoration: none; border-bottom: 1px solid #ccc; transition: 0.3s; }
         .contact-value a:hover { border-bottom: 1px solid black; }
 
         footer { text-align: center; margin-top: 100px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
+        #busuanzi_container_site_pv { margin-left: 10px; }
 
         @media (max-width: 768px) {
             .header-section { padding-top: 15px; padding-bottom: 15px; margin-bottom: 25px; }
             #main-title { text-align: left; padding-left: 20px; font-size: 2.5rem; }
-            .menu-toggle { display: block; } 
-            .navigation {
-                display: none; flex-direction: column; text-align: left; padding: 15px 25px; background: #fff; 
-                width: 100%; position: absolute; top: 100%; left: 0; z-index: 500;
-                box-shadow: 0 8px 15px rgba(0,0,0,0.08); border-top: 1px solid #eee;
-            }
+            .menu-toggle { display: block; }
+            .navigation { display: none; flex-direction: column; padding: 15px 25px; background: #fff; width: 100%; position: absolute; top: 100%; left: 0; z-index: 500; box-shadow: 0 8px 15px rgba(0,0,0,0.08); }
             .navigation.active { display: flex; }
-            .navigation li { margin: 12px 0; }
-            .contact-item { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -103,13 +53,12 @@
         <div class="contact-card">
             <div class="contact-item">
                 <span class="contact-label">Email</span>
-                <div class="contact-value">
-                    <a href="mailto:shixiongsnnu@gmail.com">shixiongsnnu@gmail.com</a>
-                </div>
+                <div class="contact-value"><a href="mailto:shixiongsnnu@gmail.com">shixiongsnnu@gmail.com</a></div>
             </div>
         </div>
     </div>
-    <footer>&copy; <span id="year"></span> Xiong Shi</footer>
+    <footer>&copy; <span id="year"></span> Xiong Shi <span id="busuanzi_container_site_pv" style="display:none">| <span id="busuanzi_value_site_pv"></span> views</span></footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
         function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
