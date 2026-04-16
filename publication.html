@@ -5,91 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xiong Shi - Publication</title>
     <style>
-        body { 
-            font-family: 'Aptos', 'Segoe UI', 'Ubuntu', sans-serif; 
-            line-height: 1.7; margin: 0; padding: 0; color: black; 
-            overflow-x: hidden;
-        }
-
-        .header-section {
-            width: 100%;
-            border-bottom: 1px solid #eee;
-            padding-top: 50px;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        #main-title { 
-            text-align: center; font-size: clamp(2.5rem, 8vw, 5.5rem); 
-            font-style: italic; font-weight: bold; margin: 0;
-            letter-spacing: -1px;
-        }
-
-        .nav-container { 
-            max-width: 1200px; margin: 0 auto; position: relative; 
-        }
-        
-        .navigation {
-            display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0;
-        }
+        body { font-family: 'Aptos', 'Segoe UI', sans-serif; line-height: 1.7; margin: 0; padding: 0; color: black; overflow-x: hidden; }
+        .header-section { width: 100%; border-bottom: 1px solid #eee; padding-top: 50px; margin-bottom: 40px; position: relative; }
+        #main-title { text-align: center; font-size: clamp(2.5rem, 8vw, 5.5rem); font-style: italic; font-weight: bold; margin: 0; letter-spacing: -1px; }
+        .nav-container { max-width: 1200px; margin: 0 auto; position: relative; }
+        .navigation { display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0; }
         .navigation li { margin: 0 25px; }
-        .navigation a { 
-            text-decoration: none; color: inherit; font-weight: 500; 
-            font-size: 1.3rem; transition: 0.3s; white-space: nowrap;
-        }
+        .navigation a { text-decoration: none; color: inherit; font-weight: 500; font-size: 1.3rem; transition: 0.3s; }
         .navigation a:hover { text-decoration: underline; opacity: 0.7; }
-
-        .menu-toggle {
-            display: none; position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-            cursor: pointer; background: none; border: none; padding: 5px; z-index: 1000;
-        }
+        .menu-toggle { display: none; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; background: none; border: none; z-index: 1000; }
         .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 20px; width: 28px; }
         .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
-        .main-content {
-            max-width: 1100px; margin: 0 auto; padding: 0 20px;
-        }
-
-        /* 时间轴与论文列表：修改为无缩进 */
+        .main-content { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         .year-section { margin-top: 40px; margin-bottom: 30px; }
-        .year-label { 
-            font-size: 1.8rem; font-weight: bold; color: #333; 
-            margin-bottom: 20px; border-left: 5px solid #000; 
-            padding-left: 15px; display: block;
-        }
-
-        /* 取消 margin: 0 auto，改为 0 以贴合左侧 */
+        .year-label { font-size: 1.8rem; font-weight: bold; color: #333; margin-bottom: 20px; border-left: 5px solid #000; padding-left: 15px; display: block; }
         .pub-list { list-style: none; padding: 0; max-width: 900px; margin: 0; }
-        .pub-list li { 
-            margin-bottom: 25px; text-align: justify; font-size: 1.15rem;
-        }
-        
+        .pub-list li { margin-bottom: 25px; text-align: justify; font-size: 1.15rem; }
         .my-name { font-weight: bold !important; }
         .journal-name { font-style: italic; }
         .doi-link { font-size: 0.9em; word-break: break-all; color: #666; text-decoration: none; }
         .doi-link:hover { text-decoration: underline; color: black; }
-
-        .co-author-title {
-            text-align: center; font-size: 1.4rem; font-weight: bold;
-            margin: 80px 0 40px; color: #666; text-transform: uppercase;
-            letter-spacing: 2px; border-top: 1px dashed #ccc; padding-top: 40px;
-        }
+        .co-author-title { text-align: center; font-size: 1.4rem; font-weight: bold; margin: 80px 0 40px; color: #666; text-transform: uppercase; letter-spacing: 2px; border-top: 1px dashed #ccc; padding-top: 40px; }
 
         footer { text-align: center; margin-top: 100px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
+        #busuanzi_container_site_pv { margin-left: 10px; }
 
         @media (max-width: 768px) {
             .header-section { padding-top: 15px; padding-bottom: 15px; margin-bottom: 25px; }
             #main-title { text-align: left; padding-left: 20px; font-size: 2.5rem; }
-            .menu-toggle { display: block; } 
-            .navigation {
-                display: none; flex-direction: column; text-align: left; padding: 15px 25px; background: #fff; 
-                width: 100%; position: absolute; top: 100%; left: 0; z-index: 500;
-                box-shadow: 0 8px 15px rgba(0,0,0,0.08); border-top: 1px solid #eee;
-            }
+            .menu-toggle { display: block; }
+            .navigation { display: none; flex-direction: column; padding: 15px 25px; background: #fff; width: 100%; position: absolute; top: 100%; left: 0; z-index: 500; box-shadow: 0 8px 15px rgba(0,0,0,0.08); }
             .navigation.active { display: flex; }
             .navigation li { margin: 12px 0; }
-            .year-label { font-size: 1.5rem; }
-            .pub-list li { font-size: 1.05rem; text-align: left; }
         }
     </style>
 </head>
@@ -106,71 +54,15 @@
             </ul>
         </div>
     </div>
-
     <div class="main-content">
-        <div class="year-section" style="margin-top: 10px;"> 
-            <span class="year-label">2026</span>
+        <div class="year-section"><span class="year-label">2026</span>
             <ul class="pub-list">
                 <li><span class="my-name">Shi X</span>, Chen D* & van Kleunen M (2026) The dominance of non-native plants over native plants increases with the number of global change factors. <span class="journal-name">Oikos</span>, accepted.</li>
             </ul>
         </div>
-
-        <div class="year-section">
-            <span class="year-label">2025</span>
-            <ul class="pub-list">
-                <li><span class="my-name">Shi X</span>, van Kleunen M & Liu YJ* (2025) Plant invasions under accumulating global change factors. <span class="journal-name">Trends in Plant Science</span>, 30: 1193-1196. <br><a class="doi-link" href="https://doi.org/10.1016/j.tplants.2025.06.006">https://doi.org/10.1016/j.tplants.2025.06.006</a></li>
-                <li><span class="my-name">Shi X</span>, Li WT, van Kleunen M, Li L & Zheng YL* (2025) Indirect competitive advantages of invasive over native plants under multiple stressors. <span class="journal-name">Journal of Environmental Management</span>, 391: 126422. <br><a class="doi-link" href="https://doi.org/10.1016/j.jenvman.2025.126422">https://doi.org/10.1016/j.jenvman.2025.126422</a></li>
-                <li><span class="my-name">Shi X</span>, Liu YJ* & van Kleunen M (2025) Additive effects of multiple global change factors on plant invasions are common. <span class="journal-name">Ecology Letters</span>, 28: e70057. <br><a class="doi-link" href="https://doi.org/10.1111/ele.70057">https://doi.org/10.1111/ele.70057</a></li>
-            </ul>
         </div>
-
-        <div class="year-section">
-            <span class="year-label">2024</span>
-            <ul class="pub-list">
-                <li><span class="my-name">Shi X</span>, Yang G & Zheng YL* (2024) Effects of microplastics, fertilization and pesticides on alien and native plants. <span class="journal-name">Plants</span>, 13(21): 2947. <br><a class="doi-link" href="https://doi.org/10.3390/plants13212947">https://doi.org/10.3390/plants13212947</a></li>
-            </ul>
-        </div>
-
-        <div class="year-section">
-            <span class="year-label">2022</span>
-            <ul class="pub-list">
-                <li><span class="my-name">Shi X</span>, Liao ZY & Zheng YL* (2022) Effects of warming and nutrient fluctuation on invader <em>Chromolaena odorata</em> and natives in artificial communities. <span class="journal-name">Plant Ecology</span>, 223: 315-322. <br><a class="doi-link" href="https://doi.org/10.1007/s11258-021-01210-9">https://doi.org/10.1007/s11258-021-01210-9</a></li>
-            </ul>
-        </div>
-
-        <div class="year-section">
-            <span class="year-label">2021</span>
-            <ul class="pub-list">
-                <li><span class="my-name">Shi X</span>, Li WT*, Zheng YL* (2021) Soil legacy effect of extreme precipitation on a tropical invader in different land use types. <span class="journal-name">Environmental and Experimental Botany</span>, 191: 104625. <br><a class="doi-link" href="https://doi.org/10.1016/j.envexpbot.2021.104625">https://doi.org/10.1016/j.envexpbot.2021.104625</a></li>
-            </ul>
-        </div>
-
-        <div class="year-section">
-            <span class="year-label">2020</span>
-            <ul class="pub-list">
-                <li><span class="my-name">Shi X</span>, Liu G & Zheng YL* (2020) Comparisons of irradiance utilization efficiency by invasive <em>Chromolaena odorata</em> and its three co-occurring species in one planted understory. <span class="journal-name">Flora</span>, 271: 151680. <br><a class="doi-link" href="https://doi.org/10.1016/j.flora.2020.151680">https://doi.org/10.1016/j.flora.2020.151680</a></li>
-            </ul>
-        </div>
-
-        <div class="co-author-title">Co-authored Papers</div>
-
-        <div class="year-section">
-            <span class="year-label">2022</span>
-            <ul class="pub-list">
-                <li>Li WT, Zheng YL*, Wang RF, Wang ZY, Liu YM, <span class="my-name">Shi X</span>, Liao ZY, Li YP, Feng YL (2022) Shifts in chemical and microbiological properties belowground of invader <em>Ageratina adenophora</em> along an altitudinal gradient. <span class="journal-name">Journal of Plant Ecology</span>, 15: 1121–1132. <br><a class="doi-link" href="https://doi.org/10.1093/jpe/rtac003">https://doi.org/10.1093/jpe/rtac003</a></li>
-            </ul>
-        </div>
-
-        <div class="year-section">
-            <span class="year-label">2018</span>
-            <ul class="pub-list">
-                <li>Yang YB, Liu G*, <span class="my-name">Shi X</span>, Zhang WG, Cai XW, Ren ZL, Yao NN, Zhu ZH*, Nie H (2018) Where will invasive plants colonize in response to climate change: predicting the invasion of <em>Galinsoga quadriradiata</em> in China. <span class="journal-name">International Journal of Environmental Research</span>, 12: 929–938. <br><a class="doi-link" href="https://doi.org/10.1007/s41742-018-0146-3">https://doi.org/10.1007/s41742-018-0146-3</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <footer>&copy; <span id="year"></span> Xiong Shi</footer>
-
+    <footer>&copy; <span id="year"></span> Xiong Shi <span id="busuanzi_container_site_pv" style="display:none">| <span id="busuanzi_value_site_pv"></span> views</span></footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
         function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
