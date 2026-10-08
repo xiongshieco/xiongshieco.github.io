@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xiong Shi - Home</title>
+    <title>Xiong Shi - Research</title>
 
     <style>
         *, *::before, *::after {
@@ -44,12 +44,12 @@
             position: relative;
         }
 
-        /* 四个导航项均匀铺开 */
+        /* 导航占屏幕 55% */
         .navigation {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
-            width: 50%;
+            width: 55%;
             list-style: none;
             padding: 25px 0;
             margin: 0 auto;
@@ -80,7 +80,7 @@
             display: none;
             position: absolute;
             right: 20px;
-            top: 55%;
+            top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
             background: none;
@@ -104,7 +104,7 @@
             border-radius: 10px;
         }
 
-        /* 主体随屏幕展开 */
+        /* 与 index.html 相同的主体宽度和边距 */
         .main-content {
             width: 100%;
             max-width: none;
@@ -112,7 +112,7 @@
             padding-inline: clamp(20px, 4vw, 80px);
         }
 
-        /* 图片居中：修改 1100px 可调整最大宽度 */
+        /* 与 index.html 相同的图片宽度 */
         .slider-container {
             width: 100%;
             max-width: 1100px;
@@ -193,7 +193,7 @@
             font-style: italic;
         }
 
-        /* 简介 */
+        /* 与 index.html 相同的文字设置 */
         .center-text {
             width: 100%;
             max-width: 1200px;
@@ -249,6 +249,7 @@
                 align-items: stretch;
                 text-align: left;
                 padding: 15px 25px;
+                margin: 0;
                 background: #fff;
                 width: 100%;
                 position: absolute;
@@ -314,7 +315,7 @@
 
             <ul class="navigation" id="navMenu">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="research.html">Research</a></li>
+                <li><a href="research.html" aria-current="page">Research</a></li>
                 <li><a href="publication.html">Publication</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -331,10 +332,9 @@
                 >&#10094;</button>
 
                 <div class="image-slider" id="slider">
-                    <img src="photos/roma.jpg" alt="Field trip in Rome">
-                    <img src="photos/sunset.jpg" alt="University of Konstanz Sunset">
-                    <img src="photos/edinburgh.jpg" alt="Edinburgh Visit">
-                    <img src="photos/snow.jpg" alt="Snow Mountain View">
+                    <img src="photos/plants.jpg" alt="Research Plants">
+                    <img src="photos/alan.jpg" alt="ALAN Research">
+                    <img src="photos/multiple_GCF.jpg" alt="GCF Experiment">
                 </div>
 
                 <button
@@ -344,22 +344,25 @@
                 >&#10095;</button>
             </div>
 
-            <div class="slider-hint">Swipe or drag to explore photos</div>
+            <div class="slider-hint">
+                Slide or drag to explore research photos
+            </div>
         </div>
 
         <div class="center-text">
             <p>
-                I am <strong>Xiong Shi (石雄)</strong>, a global change ecologist.
-                I received my bachelor's degree from Shaanxi Normal University
-                and my master's degree from Xishuangbanna Tropical Botanical
-                Garden, Chinese Academy of Sciences.
-                I then earned my PhD at the University of Konstanz, Germany,
-                under the supervision of
-                <strong>Prof. Dr. Mark van Kleunen</strong>.
-                Since May 2026, I have been a postdoctoral researcher in
-                <strong>Prof. Dr. Jingyun Fang</strong>'s lab at Peking University,
-                where I continue to investigate how global change shapes the
-                coexistence of native and non-native plants.
+                I am a global change ecologist interested in understanding how
+                multiple global change drivers, both individually and
+                interactively, influence plant populations and communities,
+                particularly in the context of coexistence between alien and
+                native species. To address this, I employed a multifaceted
+                approach, including meta-analysis, field studies, and greenhouse
+                experiments. Building on this, I am currently extending my
+                research into two key components: (1) how multiple global change
+                factors influence biodiversity–ecosystem functioning (BEF)
+                relationships, and (2) how non-native plant species shift their
+                life-history or functional traits in introduced ranges
+                (compared to their native ranges).
             </p>
         </div>
     </div>
@@ -390,165 +393,177 @@
             button.setAttribute('aria-expanded', String(isOpen));
         }
 
-        // 无限轮播
+        // 轮播图
         const slider = document.getElementById('slider');
         const wrapper = document.getElementById('wrapper');
         const nextBtn = document.getElementById('nextBtn');
         const prevBtn = document.getElementById('prevBtn');
         const slides = slider.querySelectorAll('img');
 
-        let counter = 1;
-        let isAnimating = false;
-        const size = 100;
+        if (slides.length > 1) {
+            let counter = 1;
+            let isAnimating = false;
+            let isDragging = false;
+            let startPos = 0;
+            let dragOffset = 0;
 
-        const firstClone = slides[0].cloneNode(true);
-        const lastClone = slides[slides.length - 1].cloneNode(true);
+            const firstClone = slides[0].cloneNode(true);
+            const lastClone = slides[slides.length - 1].cloneNode(true);
 
-        firstClone.setAttribute('aria-hidden', 'true');
-        lastClone.setAttribute('aria-hidden', 'true');
+            firstClone.setAttribute('aria-hidden', 'true');
+            lastClone.setAttribute('aria-hidden', 'true');
 
-        slider.appendChild(firstClone);
-        slider.insertBefore(lastClone, slides[0]);
+            slider.appendChild(firstClone);
+            slider.insertBefore(lastClone, slides[0]);
 
-        const allSlides = slider.querySelectorAll('img');
+            const allSlides = slider.querySelectorAll('img');
 
-        slider.style.transform =
-            `translateX(${-size * counter}%)`;
-
-        // 根据当前照片的原始比例调整容器高度
-        function updateSliderHeight() {
-            const currentImage = allSlides[counter];
-
-            if (!currentImage.naturalWidth) return;
-
-            const height =
-                wrapper.clientWidth *
-                currentImage.naturalHeight /
-                currentImage.naturalWidth;
-
-            wrapper.style.height = `${height}px`;
-        }
-
-        allSlides.forEach((image) => {
-            image.addEventListener('load', updateSliderHeight);
-        });
-
-        window.addEventListener('resize', updateSliderHeight);
-        updateSliderHeight();
-
-        function moveNext() {
-            if (isAnimating || counter >= allSlides.length - 1) {
-                return;
-            }
-
-            isAnimating = true;
-            slider.style.transition = 'transform 0.5s ease-in-out';
-            counter++;
-
-            slider.style.transform =
-                `translateX(${-size * counter}%)`;
-
-            updateSliderHeight();
-        }
-
-        function movePrev() {
-            if (isAnimating || counter <= 0) return;
-
-            isAnimating = true;
-            slider.style.transition = 'transform 0.5s ease-in-out';
-            counter--;
-
-            slider.style.transform =
-                `translateX(${-size * counter}%)`;
-
-            updateSliderHeight();
-        }
-
-        nextBtn.addEventListener('click', moveNext);
-        prevBtn.addEventListener('click', movePrev);
-
-        slider.addEventListener('transitionend', (event) => {
-            if (
-                event.target !== slider ||
-                event.propertyName !== 'transform'
-            ) return;
-
-            if (counter === allSlides.length - 1) {
-                slider.style.transition = 'none';
-                counter = 1;
-            } else if (counter === 0) {
-                slider.style.transition = 'none';
-                counter = allSlides.length - 2;
-            }
-
-            slider.style.transform =
-                `translateX(${-size * counter}%)`;
-
-            updateSliderHeight();
-            isAnimating = false;
-        });
-
-        // 手势与鼠标拖拽
-        let isDragging = false;
-        let startPos = 0;
-        let dragOffset = 0;
-
-        wrapper.addEventListener('mousedown', dragStart);
-        wrapper.addEventListener('touchstart', dragStart, {
-            passive: true
-        });
-
-        wrapper.addEventListener('mousemove', dragMove);
-        wrapper.addEventListener('touchmove', dragMove, {
-            passive: true
-        });
-
-        wrapper.addEventListener('mouseup', dragEnd);
-        wrapper.addEventListener('touchend', dragEnd);
-        wrapper.addEventListener('touchcancel', dragEnd);
-        wrapper.addEventListener('mouseleave', dragEnd);
-
-        function dragStart(event) {
-            if (isAnimating || event.target.closest('button')) return;
-            if (event.type === 'mousedown' && event.button !== 0) return;
-
-            isDragging = true;
-            startPos = getPositionX(event);
-            dragOffset = 0;
             slider.style.transition = 'none';
-        }
+            slider.style.transform = `translateX(${-100 * counter}%)`;
+            void slider.offsetWidth;
 
-        function dragMove(event) {
-            if (!isDragging) return;
+            // 根据当前照片的原始比例调整容器高度
+            function updateSliderHeight() {
+                const image = allSlides[counter];
 
-            dragOffset =
-                (getPositionX(event) - startPos) /
-                wrapper.offsetWidth * 100;
+                if (!image.naturalWidth) return;
 
-            slider.style.transform =
-                `translateX(${-size * counter + dragOffset}%)`;
-        }
+                const height =
+                    wrapper.clientWidth *
+                    image.naturalHeight /
+                    image.naturalWidth;
 
-        function dragEnd() {
-            if (!isDragging) return;
+                wrapper.style.height = `${height}px`;
+            }
 
-            isDragging = false;
+            allSlides.forEach((image) => {
+                image.addEventListener('load', updateSliderHeight);
+            });
 
-            if (dragOffset < -15) {
-                moveNext();
-            } else if (dragOffset > 15) {
-                movePrev();
-            } else {
+            window.addEventListener('resize', updateSliderHeight);
+            updateSliderHeight();
+
+            function moveSlide(direction) {
+                if (isAnimating) return;
+
+                isAnimating = true;
+                counter += direction;
+
+                void slider.offsetWidth;
                 slider.style.transition = 'transform 0.5s ease-in-out';
                 slider.style.transform =
-                    `translateX(${-size * counter}%)`;
-            }
-        }
+                    `translateX(${-100 * counter}%)`;
 
-        function getPositionX(event) {
-            return event.type.includes('mouse')
-                ? event.clientX
-                : event.touches[0].clientX;
+                updateSliderHeight();
+            }
+
+            nextBtn.addEventListener('click', () => moveSlide(1));
+            prevBtn.addEventListener('click', () => moveSlide(-1));
+
+            slider.addEventListener('transitionend', (event) => {
+                if (
+                    event.target !== slider ||
+                    event.propertyName !== 'transform'
+                ) return;
+
+                if (counter === allSlides.length - 1) {
+                    counter = 1;
+                    slider.style.transition = 'none';
+                    slider.style.transform =
+                        `translateX(${-100 * counter}%)`;
+                    void slider.offsetWidth;
+                } else if (counter === 0) {
+                    counter = allSlides.length - 2;
+                    slider.style.transition = 'none';
+                    slider.style.transform =
+                        `translateX(${-100 * counter}%)`;
+                    void slider.offsetWidth;
+                }
+
+                updateSliderHeight();
+                isAnimating = false;
+            });
+
+            // 鼠标和触屏拖拽
+            wrapper.addEventListener('mousedown', dragStart);
+            wrapper.addEventListener('touchstart', dragStart, {
+                passive: true
+            });
+
+            wrapper.addEventListener('mousemove', dragMove);
+            wrapper.addEventListener('touchmove', dragMove, {
+                passive: true
+            });
+
+            window.addEventListener('mouseup', dragEnd);
+            wrapper.addEventListener('touchend', dragEnd);
+            wrapper.addEventListener('touchcancel', cancelDrag);
+            wrapper.addEventListener('mouseleave', dragEnd);
+
+            function dragStart(event) {
+                if (isAnimating || event.target.closest('button')) return;
+
+                if (
+                    event.type === 'mousedown' &&
+                    event.button !== 0
+                ) return;
+
+                isDragging = true;
+                startPos = getPositionX(event);
+                dragOffset = 0;
+                slider.style.transition = 'none';
+            }
+
+            function dragMove(event) {
+                if (!isDragging) return;
+
+                dragOffset =
+                    (getPositionX(event) - startPos) /
+                    wrapper.clientWidth * 100;
+
+                dragOffset = Math.max(-80, Math.min(80, dragOffset));
+
+                slider.style.transform =
+                    `translateX(${-100 * counter + dragOffset}%)`;
+            }
+
+            function dragEnd() {
+                if (!isDragging) return;
+
+                isDragging = false;
+
+                if (dragOffset < -15) {
+                    moveSlide(1);
+                } else if (dragOffset > 15) {
+                    moveSlide(-1);
+                } else {
+                    resetDrag();
+                }
+            }
+
+            function resetDrag() {
+                void slider.offsetWidth;
+                slider.style.transition = 'transform 0.5s ease-in-out';
+                slider.style.transform =
+                    `translateX(${-100 * counter}%)`;
+            }
+
+            function cancelDrag() {
+                if (!isDragging) return;
+
+                isDragging = false;
+                resetDrag();
+            }
+
+            function getPositionX(event) {
+                return event.type.includes('mouse')
+                    ? event.clientX
+                    : event.touches[0].clientX;
+            }
+        } else {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            document.querySelector('.slider-hint').style.display = 'none';
         }
     </script>
 </body>
