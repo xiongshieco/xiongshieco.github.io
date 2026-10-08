@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xiong Shi - Home</title>
+
     <style>
-        body { 
-            font-family: 'Aptos', 'Segoe UI', 'Ubuntu', sans-serif; 
-            line-height: 1.7; margin: 0; padding: 0; color: black; 
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Aptos', 'Segoe UI', 'Ubuntu', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            color: black;
             overflow-x: hidden;
         }
 
-        /* 顶部导航全屏装饰层 */
+        /* 顶部区域 */
         .header-section {
             width: 100%;
             border-bottom: 1px solid #eee;
@@ -20,142 +28,282 @@
             position: relative;
         }
 
-        #main-title { 
-            text-align: center; font-size: clamp(2.5rem, 8vw, 5.5rem); 
-            font-style: italic; font-weight: bold; margin: 0;
+        #main-title {
+            text-align: center;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-style: italic;
+            font-weight: bold;
+            margin: 0;
             letter-spacing: -1px;
         }
 
-        .nav-container { 
-            max-width: 1200px; 
+        .nav-container {
+            width: 100%;
+            max-width: none;
             margin: 0 auto;
-            position: relative; 
+            position: relative;
         }
-        
-        /* 导航栏样式 */
+
+        /* 导航栏 */
         .navigation {
-            display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0;
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 25px 0;
+            margin: 0;
         }
-        .navigation li { margin: 0 25px; }
-        .navigation a { 
-            text-decoration: none; color: inherit; font-weight: 500; 
-            font-size: 1.3rem; transition: 0.3s; white-space: nowrap;
+
+        .navigation li {
+            margin: 0 25px;
         }
-        .navigation a:hover { text-decoration: underline; opacity: 0.7; }
+
+        .navigation a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            font-size: 1.3rem;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .navigation a:hover {
+            text-decoration: underline;
+            opacity: 0.7;
+        }
 
         /* 手机端菜单按钮 */
         .menu-toggle {
-            display: none; 
-            position: absolute; 
-            right: 20px; 
+            display: none;
+            position: absolute;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            cursor: pointer; 
-            background: none; 
-            border: none; 
-            padding: 5px; 
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
             z-index: 1000;
         }
-        .hamburger-lines { display: flex; flex-direction: column; justify-content: space-between; height: 20px; width: 28px; }
-        .line { height: 3px; width: 100%; background-color: black; border-radius: 10px; }
 
-        /* 主体内容布局 */
-        .main-content {
-            max-width: 1100px; 
-            margin: 0 auto;
-            padding: 0 20px;
+        .hamburger-lines {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 20px;
+            width: 28px;
         }
 
-        /* 轮播图容器 */
+        .line {
+            height: 3px;
+            width: 100%;
+            background-color: black;
+            border-radius: 10px;
+        }
+
+        /* 主体随屏幕宽度展开 */
+        .main-content {
+            width: 100%;
+            max-width: none;
+            margin: 0 auto;
+            padding-inline: clamp(20px, 4vw, 80px);
+        }
+
+        /* 宽幅轮播图 */
         .slider-container {
-            max-width: 600px; 
+            width: 100%;
+            max-width: none;
             margin: 30px auto 15px;
             position: relative;
         }
 
         .slider-wrapper {
-            position: relative; cursor: grab; overflow: hidden; 
-            border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            cursor: grab;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-        .slider-wrapper:active { cursor: grabbing; }
 
-        .image-slider { display: flex; transition: transform 0.5s ease-in-out; width: 100%; }
-        .image-slider img { width: 100%; flex-shrink: 0; height: 400px; object-fit: cover; -webkit-user-drag: none; }
+        .slider-wrapper:active {
+            cursor: grabbing;
+        }
 
-        /* 修复后的内部切换按钮 */
+        .image-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .image-slider img {
+            width: 100%;
+            flex-shrink: 0;
+            height: clamp(260px, 45vw, 650px);
+            object-fit: cover;
+            -webkit-user-drag: none;
+            user-select: none;
+        }
+
+        /* 图片切换按钮 */
         .nav-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.85);
-            border: none; width: 40px; height: 40px;
-            border-radius: 50%; cursor: pointer; 
-            z-index: 20; 
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.85);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 20;
             font-size: 1.2rem;
-            display: flex; align-items: center; justify-content: center; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             transition: 0.3s;
         }
-        .nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
-        .btn-prev { left: 15px; }
-        .btn-next { right: 15px; }
 
-        .slider-hint { text-align: center; font-size: 0.9rem; color: #888; margin-top: 15px; font-style: italic; }
-
-        /* 简介文字：两端对齐 */
-        .center-text { 
-            text-align: justify; text-justify: inter-word;
-            font-size: 1.4rem; max-width: 850px; margin: 50px auto; 
+        .nav-btn:hover {
+            background: #fff;
+            transform: translateY(-50%) scale(1.1);
         }
-        .center-text p { margin-bottom: 25px; }
-        .center-text a { color: inherit; text-decoration: underline; }
 
-        /* 页脚与计数器 */
-        footer { text-align: center; margin-top: 100px; font-size: 0.85em; color: #999; padding-bottom: 40px; }
-        #busuanzi_container_site_pv { margin-left: 10px; }
+        .btn-prev {
+            left: 15px;
+        }
 
-        /* 响应式适配 */
+        .btn-next {
+            right: 15px;
+        }
+
+        .slider-hint {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* 简介：如需铺满主体，将 max-width 改为 none */
+        .center-text {
+            width: 100%;
+            max-width: 1200px;
+            text-align: justify;
+            text-justify: inter-word;
+            font-size: 1.4rem;
+            margin: 50px auto;
+        }
+
+        .center-text p {
+            margin-bottom: 25px;
+        }
+
+        .center-text a {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            margin-top: 100px;
+            font-size: 0.85em;
+            color: #999;
+            padding-bottom: 40px;
+        }
+
+        #busuanzi_container_site_pv {
+            margin-left: 10px;
+        }
+
+        /* 手机端 */
         @media (max-width: 768px) {
-            .header-section { padding-top: 15px; padding-bottom: 15px; margin-bottom: 25px; }
-            #main-title { text-align: left; padding-left: 20px; font-size: 2.5rem; }
-            
-            .menu-toggle { display: block; } 
-            
+            .header-section {
+                padding-top: 15px;
+                padding-bottom: 15px;
+                margin-bottom: 25px;
+            }
+
+            #main-title {
+                text-align: left;
+                padding-left: 20px;
+                font-size: 2.5rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
             .navigation {
-                display: none; 
-                flex-direction: column; 
-                text-align: left;    
-                padding: 15px 25px; 
-                background: #fff; 
-                width: 100%; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
+                display: none;
+                flex-direction: column;
+                text-align: left;
+                padding: 15px 25px;
+                background: #fff;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
                 z-index: 500;
-                box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
                 border-top: 1px solid #eee;
             }
-            .navigation.active { display: flex; }
-            .navigation li { margin: 12px 0; }
-            .navigation a { font-size: 1.2rem; display: block; width: 100%; }
-            
-            .nav-btn { display: none; } 
-            .image-slider img { height: 260px; }
-            .slider-container { max-width: 100%; margin-top: 10px; }
-            .center-text { text-align: left; font-size: 1.2rem; margin: 30px auto; padding: 0 5px; }
+
+            .navigation.active {
+                display: flex;
+            }
+
+            .navigation li {
+                margin: 12px 0;
+            }
+
+            .navigation a {
+                font-size: 1.2rem;
+                display: block;
+                width: 100%;
+            }
+
+            .nav-btn {
+                display: none;
+            }
+
+            .image-slider img {
+                height: 260px;
+            }
+
+            .slider-container {
+                margin-top: 10px;
+            }
+
+            .center-text {
+                text-align: left;
+                font-size: 1.2rem;
+                margin: 30px auto;
+                padding: 0 5px;
+            }
         }
     </style>
 </head>
-<body>
 
+<body>
     <div class="header-section">
         <div class="nav-container">
             <h1 id="main-title">Xiong Shi</h1>
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
-                <div class="hamburger-lines">
+
+            <button
+                class="menu-toggle"
+                onclick="toggleMenu()"
+                aria-label="Toggle navigation"
+                aria-controls="navMenu"
+                aria-expanded="false"
+            >
+                <span class="hamburger-lines">
                     <span class="line"></span>
                     <span class="line"></span>
                     <span class="line"></span>
-                </div>
+                </span>
             </button>
+
             <ul class="navigation" id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="research.html">Research</a></li>
@@ -168,124 +316,204 @@
     <div class="main-content">
         <div class="slider-container">
             <div class="slider-wrapper" id="wrapper">
-                <button class="nav-btn btn-prev" id="prevBtn" aria-label="Previous">&#10094;</button>
+                <button
+                    class="nav-btn btn-prev"
+                    id="prevBtn"
+                    aria-label="Previous photo"
+                >&#10094;</button>
+
                 <div class="image-slider" id="slider">
                     <img src="photos/roma.jpg" alt="Field trip in Rome">
                     <img src="photos/sunset.jpg" alt="University of Konstanz Sunset">
                     <img src="photos/edinburgh.jpg" alt="Edinburgh Visit">
                     <img src="photos/snow.jpg" alt="Snow Mountain View">
                 </div>
-                <button class="nav-btn btn-next" id="nextBtn" aria-label="Next">&#10095;</button>
+
+                <button
+                    class="nav-btn btn-next"
+                    id="nextBtn"
+                    aria-label="Next photo"
+                >&#10095;</button>
             </div>
+
             <div class="slider-hint">Swipe or drag to explore photos</div>
         </div>
 
         <div class="center-text">
             <p>
-                I am <strong>Xiong Shi (石雄)</strong>, a global change ecologist. I received my bachelor's degree from Shaanxi Normal University and my master's degree from Xishuangbanna Tropical Botanical Garden, Chinese Academy of Sciences. 
-                I then earned my PhD at the University of Konstanz, Germany, under the supervision of <strong>Prof. Dr. Mark van Kleunen</strong>. 
-                Since May 2026, I have been a postdoctoral researcher in <strong>Prof. Dr. Fang Jingyun</strong>'s lab at Peking University, where I continue to investigate how global change shapes the coexistence of native and non-native plants.
+                I am <strong>Xiong Shi (石雄)</strong>, a global change ecologist.
+                I received my bachelor's degree from Shaanxi Normal University
+                and my master's degree from Xishuangbanna Tropical Botanical
+                Garden, Chinese Academy of Sciences.
+                I then earned my PhD at the University of Konstanz, Germany,
+                under the supervision of
+                <strong>Prof. Dr. Mark van Kleunen</strong>.
+                Since May 2026, I have been a postdoctoral researcher in
+                <strong>Prof. Dr. Fang Jingyun</strong>'s lab at Peking University,
+                where I continue to investigate how global change shapes the
+                coexistence of native and non-native plants.
             </p>
         </div>
     </div>
 
     <footer>
-        &copy; <span id="year"></span> Xiong Shi 
-        <span id="busuanzi_container_site_pv" style="display:none">
+        &copy; <span id="year"></span> Xiong Shi
+        <span id="busuanzi_container_site_pv" style="display: none;">
             | <span id="busuanzi_value_site_pv"></span> views
         </span>
     </footer>
 
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script
+        async
+        src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+    ></script>
 
     <script>
-        // 1. 自动年份
-        document.getElementById("year").textContent = new Date().getFullYear();
+        // 自动年份
+        document.getElementById('year').textContent =
+            new Date().getFullYear();
 
-        // 2. 菜单切换
-        function toggleMenu() { 
-            const menu = document.getElementById("navMenu");
-            menu.classList.toggle("active"); 
+        // 手机菜单
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            const button = document.querySelector('.menu-toggle');
+            const isOpen = menu.classList.toggle('active');
+            button.setAttribute('aria-expanded', String(isOpen));
         }
 
-        // --- 3. 无限轮播逻辑 ---
+        // 无限轮播
         const slider = document.getElementById('slider');
         const wrapper = document.getElementById('wrapper');
         const nextBtn = document.getElementById('nextBtn');
         const prevBtn = document.getElementById('prevBtn');
-        let slides = document.querySelectorAll('.image-slider img');
+        const slides = slider.querySelectorAll('img');
 
         let counter = 1;
         const size = 100;
 
         const firstClone = slides[0].cloneNode(true);
         const lastClone = slides[slides.length - 1].cloneNode(true);
+
+        firstClone.setAttribute('aria-hidden', 'true');
+        lastClone.setAttribute('aria-hidden', 'true');
+
         slider.appendChild(firstClone);
         slider.insertBefore(lastClone, slides[0]);
 
-        const allSlides = document.querySelectorAll('.image-slider img');
-        slider.style.transform = `translateX(${-size * counter}%)`;
+        const allSlides = slider.querySelectorAll('img');
+
+        slider.style.transform =
+            `translateX(${-size * counter}%)`;
 
         function moveNext() {
             if (counter >= allSlides.length - 1) return;
-            slider.style.transition = "transform 0.5s ease-in-out";
+
+            slider.style.transition =
+                'transform 0.5s ease-in-out';
+
             counter++;
-            slider.style.transform = `translateX(${-size * counter}%)`;
+            slider.style.transform =
+                `translateX(${-size * counter}%)`;
         }
 
         function movePrev() {
             if (counter <= 0) return;
-            slider.style.transition = "transform 0.5s ease-in-out";
+
+            slider.style.transition =
+                'transform 0.5s ease-in-out';
+
             counter--;
-            slider.style.transform = `translateX(${-size * counter}%)`;
+            slider.style.transform =
+                `translateX(${-size * counter}%)`;
         }
 
         nextBtn.addEventListener('click', moveNext);
         prevBtn.addEventListener('click', movePrev);
 
-        slider.addEventListener('transitionend', () => {
-            if (allSlides[counter].src.includes(firstClone.src.split('/').pop()) && counter === allSlides.length - 1) {
-                slider.style.transition = "none";
+        slider.addEventListener('transitionend', (event) => {
+            if (
+                event.target !== slider ||
+                event.propertyName !== 'transform'
+            ) return;
+
+            if (counter === allSlides.length - 1) {
+                slider.style.transition = 'none';
                 counter = 1;
-                slider.style.transform = `translateX(${-size * counter}%)`;
-            }
-            if (allSlides[counter].src.includes(lastClone.src.split('/').pop()) && counter === 0) {
-                slider.style.transition = "none";
+                slider.style.transform =
+                    `translateX(${-size * counter}%)`;
+            } else if (counter === 0) {
+                slider.style.transition = 'none';
                 counter = allSlides.length - 2;
-                slider.style.transform = `translateX(${-size * counter}%)`;
+                slider.style.transform =
+                    `translateX(${-size * counter}%)`;
             }
         });
 
-        // 4. 手势与拖拽支持
-        let isDragging = false, startPos = 0;
+        // 手势与鼠标拖拽
+        let isDragging = false;
+        let startPos = 0;
+        let dragOffset = 0;
+
         wrapper.addEventListener('mousedown', dragStart);
-        wrapper.addEventListener('touchstart', dragStart, {passive: true});
+        wrapper.addEventListener('touchstart', dragStart, {
+            passive: true
+        });
+
         wrapper.addEventListener('mousemove', dragMove);
-        wrapper.addEventListener('touchmove', dragMove, {passive: true});
+        wrapper.addEventListener('touchmove', dragMove, {
+            passive: true
+        });
+
         wrapper.addEventListener('mouseup', dragEnd);
         wrapper.addEventListener('touchend', dragEnd);
+        wrapper.addEventListener('touchcancel', dragEnd);
         wrapper.addEventListener('mouseleave', dragEnd);
 
-        function dragStart(e) { 
-            if (e.target.tagName === 'BUTTON') return;
-            isDragging = true; startPos = getPositionX(e); slider.style.transition = "none"; 
+        function dragStart(event) {
+            if (event.target.closest('button')) return;
+
+            isDragging = true;
+            startPos = getPositionX(event);
+            dragOffset = 0;
+            slider.style.transition = 'none';
         }
-        function dragMove(e) {
+
+        function dragMove(event) {
             if (!isDragging) return;
-            const currentPosition = getPositionX(e);
-            const diff = (currentPosition - startPos) / wrapper.offsetWidth * 100;
-            slider.style.transform = `translateX(${-size * counter + diff}%)`;
+
+            dragOffset =
+                (getPositionX(event) - startPos) /
+                wrapper.offsetWidth * 100;
+
+            slider.style.transform =
+                `translateX(${-size * counter + dragOffset}%)`;
         }
+
         function dragEnd() {
             if (!isDragging) return;
+
             isDragging = false;
-            const movedBy = (parseFloat(slider.style.transform.replace('translateX(', '')) + (counter * size));
-            slider.style.transition = "transform 0.5s ease-in-out";
-            if (movedBy < -15) moveNext();
-            else if (movedBy > 15) movePrev();
-            else slider.style.transform = `translateX(${-size * counter}%)`;
+            slider.style.transition =
+                'transform 0.5s ease-in-out';
+
+            if (
+                dragOffset < -15 &&
+                counter < allSlides.length - 1
+            ) {
+                moveNext();
+            } else if (dragOffset > 15 && counter > 0) {
+                movePrev();
+            } else {
+                slider.style.transform =
+                    `translateX(${-size * counter}%)`;
+            }
         }
-        function getPositionX(e) { return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX; }
+
+        function getPositionX(event) {
+            return event.type.includes('mouse')
+                ? event.clientX
+                : event.touches[0].clientX;
+        }
     </script>
 </body>
 </html>
