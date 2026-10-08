@@ -33,15 +33,40 @@
         }
         
         /* 电脑端导航样式 */
-        .navigation {
-            display: flex; justify-content: center; list-style: none; padding: 25px 0; margin: 0;
-        }
-        .navigation li { margin: 0 25px; }
-        .navigation a { 
-            text-decoration: none; color: inherit; font-weight: 500; 
-            font-size: 1.3rem; transition: 0.3s; white-space: nowrap;
-        }
-        .navigation a:hover { text-decoration: underline; opacity: 0.7; }
+        .nav-container {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* 导航占屏幕 80%，居中 */
+.navigation {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 55%;
+    list-style: none;
+    padding: 25px 0;
+    margin: 0 auto;
+}
+
+/* 四个导航项均分宽度 */
+.navigation li {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+}
+
+/* 导航文字放大 */
+.navigation a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    font-size: 1.8rem;
+    transition: 0.3s;
+    white-space: nowrap;
+}
 
         /* 手机端菜单按钮 */
         .menu-toggle {
@@ -139,6 +164,7 @@
                 <span class="contact-label">Email</span>
                 <div class="contact-value">
                     <a href="mailto:shixiongsnnu@gmail.com">shixiongsnnu@gmail.com</a>
+                    <a href="mailto:xiong.shi@pku.edu.cn">xiong.shi@pku.edu.cn</a>
                 </div>
             </div>
         </div>
